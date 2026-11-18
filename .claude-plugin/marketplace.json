@@ -1,0 +1,10 @@
+{
+  "name": "winnie-skills",
+  "owner": { "name": "Winnie" },
+  "plugins": [
+    { "name": "vietnamese-writing", "source": "./plugins/vietnamese-writing", "description": "Vietnamese voice, style guide, grammar, copy polish, transcript cleaning" },
+    { "name": "teaching", "source": "./plugins/teaching", "description": "Course design, slide decks, notes audit, landing page, lesson review" },
+    { "name": "product-workspace", "source": "./plugins/product-workspace", "description": "AI Product Workspace project helper" },
+    { "name": "tools", "source": "./plugins/tools", "description": "Utility skills (viet-font-kit)" }
+  ]
+}
