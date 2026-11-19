@@ -42,6 +42,7 @@ Luôn đọc `project/README.md` của DS này bằng Artifact tool (action read
 - Không đặt được `lang="vi"` trên từng slide.
 - Ảnh phải là asset đã upload (`/_blob/<id>`), không dùng URL hay `data:`.
 - Pinned element phải nằm trong canvas 1920x1080; hình trang trí vẽ bằng `<x-shape>`.
+- Mọi card và khung (specimen, mẫu chữ, thẻ bài tập) bo góc `--radius-lg` (22px) và viền 2px `--ink`, theo README Design System. Nếu outline ghi "square corners", theo Design System, không theo outline.
 
 ### Loại slide sang layout của Design System
 
