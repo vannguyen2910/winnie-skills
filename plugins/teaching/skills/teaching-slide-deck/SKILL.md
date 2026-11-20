@@ -52,9 +52,40 @@ Luôn đọc `project/README.md` của DS này bằng Artifact tool (action read
 | SECTION DIVIDER | Section Main (nền vàng full-bleed, số lớn ở góc, tiêu đề căn giữa) |
 | STATEMENT | Statement |
 | COMPARE | Compare hai cột |
-| DIAGRAM, bài tập về nhà | Khung viền + Card Row (thẻ cuối nhấn nền `--ink`) |
+| DIAGRAM, bài tập về nhà | Khung viền + Card Row. Mọi card cùng mức, không card nào nền `--ink` hay nhấn riêng |
+| PROCESS, "Cách làm", "Use case", NUMBERED có thứ tự | Danh sách số (xem "Kiểu danh sách số") |
+| Ba đến bốn ý, mỗi ý có hình minh hoạ | Line-art feature card (xem bên dưới) |
 | MILESTONE, practice | Milestone (nền `--sienna`) |
 | END | End |
+
+### Kiểu danh sách số (slide quy trình)
+
+Tiêu đề bên trái (rộng khoảng 527px, 64px), bên phải là danh sách đánh số 01, 02… mỗi dòng chiếm đều chiều cao, cách nhau bằng đường kẻ mảnh `#14121f26`, không dùng card. Số Be Vietnam Pro 48px đậm màu ink, chữ 32px đậm (28px khi có sáu dòng trở lên). Lấy `how-audit.html` của deck Lesson 6 làm mẫu. `<section>` chính là khung `display:grid; grid-template-columns:0.8fr 1fr; gap:96px; padding:96px`.
+
+### Line-art feature card
+
+- Card nền trắng, viền 2px ink, bo 22px, padding 36px, mọi card trong một hàng cùng mức (`flex:1`, `align-items:stretch`).
+- Phần trên là hình line-art lớn: SVG viewBox 200x140, nét 1.4, `fill:none`, bo đầu nét, cao khoảng 260 đến 300px, đặt giữa card, không có nền riêng hay khung phụ.
+- Phần dưới là số 01, 02, 03 (Be Vietnam Pro 44px, màu `#6b3fee`), tiêu đề đậm 40px, mô tả 28px màu `#3d3552`.
+- Khối chữ (số, tiêu đề, mô tả) nằm ở đáy card. Hình chiếm phần còn lại phía trên và đặt giữa vùng đó.
+- Căn thẳng hàng giữa các card: số, tiêu đề và mô tả của mọi card bắt đầu cùng một mức. Cách làm: tiêu đề giữ một dòng (rút ngắn chữ nếu cần), và mô tả có `min-height` đủ cho dòng dài nhất trong hàng (ví dụ 78px cho hai dòng 28px). Không để khối chữ cao thấp khác nhau giữa các card.
+- Khuôn đã được Winnie duyệt (ba card, slide "Bốn bộ tiêu chí để audit UX"): card `display:flex; flex-direction:column; justify-content:space-between; gap:24px; flex:1; padding:36px`; vùng hình `display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1` chứa `<svg viewBox="0 0 200 140" style="width:429px; height:300px">`; khối chữ gồm ba thẻ `<p>`: số 44px đậm `#6b3fee`, tiêu đề 40px đậm `#1a1325`, mô tả 28px `#3d3552` có `min-height`. Kết quả: hàng ba card bằng nhau, hình line-art nét mảnh ở trên, chữ thẳng hàng ở đáy.
+- Trước khi làm slide mới theo kiểu này, đọc một slide mẫu đã có trong deck (ví dụ `criteria.html` hoặc `ex-audit-record.html`) và chép đúng khuôn, không dựng lại theo trí nhớ.
+
+### Deck dạng inline (không có khoá `format` trong `deck.json`)
+
+Deck cũ của Winnie là deck inline: mỗi slide tự mang style, không có `deck.css`. Trình xem của cô ấy đọc deck bằng quy tắc riêng, nên:
+
+- Chỉ dùng thẻ `h1`–`h3`, `p`, `ul`/`ol`, `div`, `img`, `svg`, `table`, `hr`, `x-*`, và trong dòng `b`, `i`, `u`, `a`, `span`, `br`.
+- Không dùng `repeat()`, `minmax()`, `max-width`, đơn vị `em` hoặc `rem`, `var()`, `animation`, số dòng của grid. Viết cột grid rõ ra (`1fr 1fr 1fr`), dùng `width` thay cho `max-width`, và dùng px.
+- Để `<section>` là khung layout (flex hoặc grid) như các slide gốc. Không bọc thêm một `div` cao cố định chứa lưới; kiểu này đã làm vỡ nhiều slide.
+- Chữ nhỏ nhất 24px. Pinned element nằm trong canvas 1920x1080.
+- Một lệnh `display` chỉ nên là `flex`, `grid`, `block` hoặc `none`.
+
+### Dựng slide bằng script
+
+- Không rút chữ từ file HTML có sẵn bằng regex rồi dựng lại; một lỗi như vậy đã để lại thẻ `div` không đóng và slide bị khoá chỉ đọc. Dựng từ dữ liệu viết rõ (tiêu đề, mô tả, notes), rồi đếm `<div` so với `</div>` trong mỗi file trước khi lưu.
+- Giữ riêng danh sách các slide làm tay hoặc đã được Winnie chỉnh, và để script bỏ qua chúng.
 
 ## Bìa
 
@@ -106,10 +137,16 @@ Câu hỏi cho lớp: finding hàng đầu trong case của bạn trả lời ba
 - Giữ các chỉnh sửa của Winnie (ví dụ nhãn bìa, phần cô ấy đã xoá). Nếu lần lưu báo đã ghi đè một bản vừa lưu từ trang, nói rõ file nào bị ghi đè.
 - Comment trên artifact: trả lời trong đúng thread (ArtifactComments), một dòng gọn trong phiên làm việc, không tự đóng thread.
 - Khi Winnie sửa tay cùng một chỗ ở nhiều deck, ghi quy tắc đó vào skill này.
+- Khi Winnie nói "giống slide N", mở slide N (đếm theo thứ tự hiện tại trong `deck.json`, không theo thứ tự cũ) và chép khuôn của nó trước khi sửa. Không làm theo trí nhớ.
+- Chỉ gửi những file đã đổi. Không dựng lại cả deck rồi ghi đè; Winnie sửa trực tiếp trong trang và có thể có phiên trả lời comment tự động cũng đang sửa slide. Nếu một slide bị đổi phong cách mà bạn không làm, đọc lại nó rồi mới sửa tiếp, và nói với Winnie.
+- Sau mỗi lần sửa nhiều slide, kiểm số thẻ `div` mở và đóng của từng file.
+- Các quy tắc Winnie đã chốt: mọi card cùng mức, không card nhấn riêng; slide quy trình dùng kiểu danh sách số; line-art feature card có hình lớn ở trên, số, tiêu đề và mô tả ở đáy; các card trong một hàng căn thẳng hàng với nhau.
 
 ## Xem trước
 
 Xem trước bằng Playwright theo quy trình của loại Slides cần Playwright cài ở `/opt/node-tools`. Nếu máy không có, nói rõ chưa xem trước, rồi nhờ Winnie mở artifact kiểm tra; không tự cài thêm.
+
+Trình duyệt trong app không đăng nhập được claude.ai, nên không xem được deck thật. Khi cần kiểm bố cục, có thể ghép các `<section>` thành một trang HTML cục bộ (đặt `margin:0` cho `p`, `h1`–`h3`, mỗi slide 1920x1080), mở bằng `preview_start`, rồi chạy một đoạn JavaScript kiểm phần tử tràn ra ngoài slide. Cách này chỉ là xấp xỉ; luôn ghi "chưa xem trong trình xem thật" khi giao.
 
 ## Lưu ý
 
