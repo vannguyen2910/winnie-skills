@@ -17,17 +17,12 @@
     {
       "name": "product-workspace",
       "source": "./plugins/product-workspace",
-      "description": "AI Product Workspace project helper, competitor research and screen capture"
+      "description": "AI Product Workspace: hub helper, competitor research, and research methods (stakeholder map, PESTEL, survey, interview, user-voice synthesis)"
     },
     {
       "name": "tools",
       "source": "./plugins/tools",
       "description": "Utility skills (viet-font-kit)"
-    },
-    {
-      "name": "product-research",
-      "source": "./plugins/product-research",
-      "description": "Product research workflows: stakeholder map, PESTEL, survey, interview, user-voice synthesis"
     }
   ]
 }
