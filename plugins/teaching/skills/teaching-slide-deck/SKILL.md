@@ -20,7 +20,7 @@ Luôn đọc `project/README.md` của DS này bằng Artifact tool (action read
 1. **Đọc trước, hỏi sau:** nếu deck thuộc một lesson trong repo, đọc `*-slide-outline.md` và `*-lesson.md` của lesson trước. Chỉ hỏi những gì chưa biết (ngôn ngữ VI, EN hoặc song ngữ; cách xử lý ảnh còn thiếu; có build mẫu vài slide trước không). Dùng AskUserQuestion với các lựa chọn, gộp nhiều câu vào một lần hỏi.
 2. **Chọn layout** theo bảng "Loại slide sang layout" bên dưới. Không thêm layout, font hay cỡ chữ mới nếu chưa được yêu cầu.
 3. **Build mẫu trước:** dựng 6 slide đại diện (bìa, một diagram, một divider, một compare, một statement, practice), mở artifact cho Winnie duyệt giao diện rồi mới build phần còn lại.
-4. **Điền nội dung** theo README: một ý một slide; kicker, số 01/02/03, callout "Ví dụ"; card, illustration line-art, token cỡ chữ; icon chỉ lấy từ fonts.google.com/icons (Material Symbols Rounded) hoặc `<x-icon>`, không emoji.
+4. **Điền nội dung** theo README: một ý một slide; kicker, số 01/02/03, callout "Ví dụ"; card, illustration line-art, token cỡ chữ; icon chỉ lấy từ fonts.google.com/icons (Material Symbols Rounded) hoặc `<x-icon>`, không emoji. Ngoại lệ: khung icon của slide What/Why/When và mọi icon đặt trong khung riêng dùng line-art (xem "Slide What/Why/When").
 5. **Viết speaker notes** cho từng slide theo định dạng bên dưới.
 6. **Biên tập tiếng Việt** (bắt buộc với mọi nội dung tiếng Việt, gồm cả speaker notes), theo thứ tự: `translationese-cleaner-vi`, `style-guide-vi`, `grammar-checker-vi`. Gọi bằng tên đầy đủ có tiền tố (`vietnamese-writing:translationese-cleaner-vi`, `vietnamese-writing:style-guide-vi`, `vietnamese-writing:grammar-checker-vi`). Không sửa code, URL, tên sản phẩm. Dùng dấu nháy cong “ ” và ’ trong chữ người đọc.
 7. **Kiểm tra:** tương phản WCAG 2.1 AA, không emoji, không hard-code font hay cỡ chữ ngoài token. Chữ nhỏ nhất: 24px (xem mục giới hạn định dạng).
@@ -87,6 +87,49 @@ Deck cũ của Winnie là deck inline: mỗi slide tự mang style, không có `
 - Không rút chữ từ file HTML có sẵn bằng regex rồi dựng lại; một lỗi như vậy đã để lại thẻ `div` không đóng và slide bị khoá chỉ đọc. Dựng từ dữ liệu viết rõ (tiêu đề, mô tả, notes), rồi đếm `<div` so với `</div>` trong mỗi file trước khi lưu.
 - Giữ riêng danh sách các slide làm tay hoặc đã được Winnie chỉnh, và để script bỏ qua chúng.
 
+## Hiện từng phần theo click (click reveal)
+
+Winnie muốn slide dày chữ hiện từng khối mỗi lần bấm, để học viên không đọc trước và cô ấy đỡ bị ngợp. Làm cho mọi slide có từ hai khối trở lên (hàng card, danh sách số, cột What/Why/When, bảng nhiều dòng, câu kết). Đã làm cho cả sáu deck Lesson 1 đến 6.
+
+**Cơ chế (deck inline, không có khoá `format`):** mỗi khối là một phần tử `position:absolute` có thuộc tính `data-build-in="rise N"` (N là thứ tự bấm; cũng dùng được `fade`, `pop`). Không dùng `class="fragment"`, không thêm `deck.css`: đó là cơ chế của deck v5 và làm vỡ deck có sẵn slide.
+
+**Cách dựng:**
+- Phần đầu slide (kicker, tiêu đề) giữ nguyên trong luồng. Mỗi card, dòng, cột đổi thành khối pinned: `box-sizing:border-box; position:absolute; left; top; width; height`. Bỏ `flex:1` và `height` cũ của khối, bỏ lưới hay wrapper bao quanh.
+- Câu chú hoặc câu kết ở cuối cũng là một khối (một lần bấm), bọc trong `<div style="margin:0">` rồi pin.
+- Giữ `top + height <= 952` để không ra khỏi canvas 1920x1080 (lề 96px). Chữ dài hơn khung thì tăng `height`, không giảm cỡ chữ.
+- Dùng `scripts/pin_lib.py` (`kids`, `pin`, `endof`, `balanced`). Sau khi sửa, `balanced()` phải đúng: đếm `<div` bằng `</div>` trong từng file.
+
+**Hình học đã dùng (px, canvas 1920 rộng, lề 96):**
+
+| Kiểu slide | Khối |
+|---|---|
+| Danh sách số, tiêu đề bên trái (agenda, how-audit) | N dòng ở `left 917`, `width 907`, mỗi dòng cao `888/N`, `top = 96 + cao*i` (5 dòng: cao 177) |
+| Hai card | `left 96 và 976`, `width 848`, `top 300 đến 360`, cao 500 đến 560 |
+| Ba card | `left 96 + 584*i`, `width 560`, `top 300 đến 340`, cao 440 đến 640 |
+| Ba card có số lớn (metric) | `left 96 + 586*i`, `width 554`, `top 300`, cao 540 |
+| Bốn card nhỏ | `left 96 + 438*i`, `width 414`, `top 360`, cao 300 |
+| Sáu card (3 x 2) | `left 96 + 584*(i%3)`, `top 300 + 274*(i//3)`, `width 560`, cao 250 |
+| Bảng nhiều dòng | mỗi dòng một khối, `left 96`, `width 1728`, dòng cao 80 (đầu bảng 48) |
+| Quy trình thẻ và mũi tên (4 thẻ, 3 mũi tên) | thẻ `left 96/548/1000/1452`, `width 372`; mũi tên chen giữa, `width 48` |
+
+**Không làm** với slide chỉ có ảnh hoặc sơ đồ một khối, divider, bìa, slide chỉ có một tiêu đề và một câu (chia thêm làm tiêu đề lệch khỏi giữa trang), slide hình học phụ thuộc nhau (ma trận 2x2 có trục, flow-shapes), slide đang ẩn.
+
+**Kiểm tra:** mở bằng Present (nút play, "Present"). Phím Right hiện thêm một khối; hiện đủ thì bấm tiếp sang slide kế; phím Left lùi về slide trước chứ không lùi từng khối. Ảnh chụp ngay sau lần bấm đầu có thể còn mờ vì hiệu ứng đang chạy. Khi giao, nói rõ slide nào đã xem ở Present và slide nào chưa.
+
+## Slide What/Why/When (layout Method)
+
+Slide "X là gì?" phải theo layout Method của `templates/slide-deck/SlideDeck.dc.html` (class `method`), không tự biến tấu:
+- Hàng đầu: bên trái kicker (màu `#4a24c4`, ví dụ "Định nghĩa") và tiêu đề 72px có dòng "là gì?" màu `#6b3fee`; bên phải là khung icon 460x230, viền 5px ink, bo 20px, icon căn giữa.
+- Ba cột dưới tiêu đề: viền trên 4px ink, `padding-top` 32px, cách nhau 72px (`left 96/696/1296`, `width 528`, `top 520`, cao 420).
+- Nhãn WHAT, WHY, WHEN: JetBrains Mono 24px, `letter-spacing` 1px, màu `#4a24c4`, cách chữ 24px.
+- Nội dung là đoạn văn thường (Inter 28px, `line-height` 1.6, cách đoạn 32px). Không dùng chấm tròn đầu dòng. "Không cần khi:" và "Nếu thiếu:" giữ nguyên trong đoạn.
+- Ba cột hiện lần lượt theo click.
+- Icon theo nội dung slide đó, không dùng chung một icon (icon lưới 8 ô của template chỉ dành cho Crazy 8s).
+
+**Icon line-art:** SVG `viewBox="0 0 200 140"`, hiển thị `width 240, height 168`, nét `#1a1325` dày 1.7, `fill:none`, đầu nét và góc bo tròn, không tô màu, không gradient, có `role="img"` và `aria-label`. Vẽ tay bằng hình cơ bản (ví dụ bảng kiểm với dấu tích, hình người trong vòng tròn, hình trụ dữ liệu, bóng đèn, đường đi nối ba nút). Không dùng icon Material Symbols đặc (nét đầy) trong các khung này.
+
+Đã áp cho: Lesson 1 `hub-purpose`; Lesson 3 `hub-what`, `journey-what`, `opp-what`, `persona-what`; Lesson 4 `hmw-what`, `processmap-what`, `sketch-what`, `userflow-what`; Lesson 6 `what-audit`, `what-test`, `what-a11y`. Chưa tìm thấy slide kiểu này ở Lesson 2 và 5; kiểu thẻ What/Why/Ẩn dụ (`github-what`, `md-file`) khác layout Method nên để nguyên.
+
 ## Bố cục dọc và chi tiết hình ảnh đã chốt
 
 - **Nội dung căn giữa dọc trong vùng content.** Kicker, tiêu đề và câu lead (nếu có) nằm ở trên. Phần còn lại (hình, card, khung, so sánh) bọc trong `<div class="bodyx">` để nằm giữa theo chiều dọc của khoảng trống còn lại. `deck.css` khai báo `.bodyx { flex: 1; display: flex; flex-direction: column; justify-content: center; }`. Chỉ áp cho slide thường (`class="slide"`). Không áp cho cover, section divider, milestone, statement, và slide đã có một hàng cao gần kín canvas (ví dụ ảnh điện thoại 888px).
@@ -150,6 +193,8 @@ Câu hỏi cho lớp: finding hàng đầu trong case của bạn trả lời ba
 - Khi Winnie nói "giống slide N", mở slide N (đếm theo thứ tự hiện tại trong `deck.json`, không theo thứ tự cũ) và chép khuôn của nó trước khi sửa. Không làm theo trí nhớ.
 - Chỉ gửi những file đã đổi. Không dựng lại cả deck rồi ghi đè; Winnie sửa trực tiếp trong trang và có thể có phiên trả lời comment tự động cũng đang sửa slide. Nếu một slide bị đổi phong cách mà bạn không làm, đọc lại nó rồi mới sửa tiếp, và nói với Winnie.
 - Sau mỗi lần sửa nhiều slide, kiểm số thẻ `div` mở và đóng của từng file.
+- Slide What/Why/When phải khớp layout Method của template và có icon line-art theo nội dung (Winnie đã hỏi "sao không giống Slide Template" và "icon phải theo content của slide").
+- Slide dày chữ hiện từng khối theo click (xem "Hiện từng phần theo click").
 - Các quy tắc Winnie đã chốt: mọi card cùng mức, không card nhấn riêng; slide quy trình dùng kiểu danh sách số; line-art feature card có hình lớn ở trên, số, tiêu đề và mô tả ở đáy; các card trong một hàng căn thẳng hàng với nhau.
 
 ## Xem trước
