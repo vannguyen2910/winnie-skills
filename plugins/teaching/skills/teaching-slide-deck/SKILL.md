@@ -34,6 +34,7 @@ Luôn đọc `project/README.md` của DS này bằng Artifact tool (action read
 3. `project/deck.css` khai báo mọi token đang dùng (`:root { --ink: ...; }`) và các class layout. Slide chỉ dùng class, không dùng `#id`. Không dùng `@import`; font khai báo trong `faces` của `deck.json` (Be Vietnam Pro, Inter, JetBrains Mono qua Google Fonts cho deck tiếng Việt).
 4. Mỗi slide là một file `project/slides/<id>.html` có đúng một `<section id class="slide ...">`, speaker notes trong một `<aside>` ở cuối.
 5. Thứ tự: viết `deck.json` đầu tiên (đủ `order`), rồi `deck.css` và slide bìa, lưu ba file cùng một lượt, sau đó các slide còn lại.
+6. **Slide mới bắt đầu từ mẫu, không tự vẽ layout.** Đọc `project/templates/slide-deck/lesson-patterns/README.md` trong Design System, rồi copy mẫu gần nhất (`method-what-why-when`, `cards-3-icons`, `cards-3-numbered`, `steps-vertical`, `compare-2`, `code-and-list`) và chỉ đổi nội dung. Mẫu đã có click reveal và kích thước pin đúng. Kiểu slide chưa có mẫu thì tra bảng "Slide chuẩn trong các deck Lesson" trong cùng README, đọc slide đó ở deck Lesson rồi copy cấu trúc, và báo Winnie để thêm mẫu mới vào Design System.
 
 ### Giới hạn của định dạng Slides (khác README Design System)
 
