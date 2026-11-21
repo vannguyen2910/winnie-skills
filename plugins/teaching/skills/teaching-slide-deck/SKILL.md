@@ -128,7 +128,7 @@ Slide "X là gì?" phải theo layout Method của `templates/slide-deck/SlideDe
 
 **Icon line-art:** SVG `viewBox="0 0 200 140"`, hiển thị `width 240, height 168`, nét `#1a1325` dày 1.7, `fill:none`, đầu nét và góc bo tròn, không tô màu, không gradient, có `role="img"` và `aria-label`. Vẽ tay bằng hình cơ bản (ví dụ bảng kiểm với dấu tích, hình người trong vòng tròn, hình trụ dữ liệu, bóng đèn, đường đi nối ba nút). Không dùng icon Material Symbols đặc (nét đầy) trong các khung này.
 
-Đã áp cho: Lesson 1 `hub-purpose`; Lesson 3 `hub-what`, `journey-what`, `opp-what`, `persona-what`; Lesson 4 `hmw-what`, `processmap-what`, `sketch-what`, `userflow-what`; Lesson 6 `what-audit`, `what-test`, `what-a11y`. Chưa tìm thấy slide kiểu này ở Lesson 2 và 5; kiểu thẻ What/Why/Ẩn dụ (`github-what`, `md-file`) khác layout Method nên để nguyên.
+Đã áp cho: Lesson 1 `hub-purpose`; Lesson 3 `hub-what`, `journey-what`, `opp-what`, `persona-what`; Lesson 4 `hmw-what`, `processmap-what`, `sketch-what`, `userflow-what`; Lesson 2 `s10`, `s27`, `s30`, `s51`, `s61`; Lesson 6 `what-audit`, `what-test`, `what-a11y`. Lesson 5 không có slide kiểu này (các slide "X là gì?" ở đó có bullet bên trái và hình bên phải, layout khác); kiểu thẻ What/Why/Ẩn dụ (`github-what`, `md-file`) khác layout Method nên để nguyên.
 
 ## Bố cục dọc và chi tiết hình ảnh đã chốt
 
@@ -165,6 +165,8 @@ Mục tiêu: Winnie đọc là nói được ngay, scan nhanh khi đang đứng 
 - Mỗi đoạn 1-3 câu. Câu ngắn, viết như lời nói, trực tiếp, có ví dụ cụ thể thay vì khái niệm trừu tượng.
 - Cả bản notes khoảng 150-200 từ; chỉ dài hơn với slide dày nội dung.
 - Không thêm phần thời gian trừ khi Winnie yêu cầu.
+- Xưng hô trong notes: dùng "chúng ta" cho người dạy và học viên, không dùng "bạn". "Mình" vẫn là người dạy tự xưng. Lời thoại hỏi người được phỏng vấn trong dấu “ ” giữ nguyên "bạn".
+- Slide hiện từng khối theo click: viết notes theo đúng thứ tự khối hiện ra (khối 1, rồi khối 2…), ví dụ minh hoạ đặt ngay sau khối nó minh hoạ, câu chuyển tiếp và câu hỏi cho lớp ở cuối. Winnie không muốn phải đọc lướt notes để tự sắp lại thứ tự nói.
 - Chỉ dùng các đoạn slide thực sự cần. Slide mở đầu hoặc slide chuyển ý có thể chỉ cần câu nối và câu hỏi.
 
 ### Ví dụ chuẩn (mục tiêu đầu ra)
