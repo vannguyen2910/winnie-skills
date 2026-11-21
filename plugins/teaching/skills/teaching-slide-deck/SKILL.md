@@ -87,6 +87,16 @@ Deck cũ của Winnie là deck inline: mỗi slide tự mang style, không có `
 - Không rút chữ từ file HTML có sẵn bằng regex rồi dựng lại; một lỗi như vậy đã để lại thẻ `div` không đóng và slide bị khoá chỉ đọc. Dựng từ dữ liệu viết rõ (tiêu đề, mô tả, notes), rồi đếm `<div` so với `</div>` trong mỗi file trước khi lưu.
 - Giữ riêng danh sách các slide làm tay hoặc đã được Winnie chỉnh, và để script bỏ qua chúng.
 
+## Bố cục dọc và chi tiết hình ảnh đã chốt
+
+- **Nội dung căn giữa dọc trong vùng content.** Kicker, tiêu đề và câu lead (nếu có) nằm ở trên. Phần còn lại (hình, card, khung, so sánh) bọc trong `<div class="bodyx">` để nằm giữa theo chiều dọc của khoảng trống còn lại. `deck.css` khai báo `.bodyx { flex: 1; display: flex; flex-direction: column; justify-content: center; }`. Chỉ áp cho slide thường (`class="slide"`). Không áp cho cover, section divider, milestone, statement, và slide đã có một hàng cao gần kín canvas (ví dụ ảnh điện thoại 888px).
+- **Không căn giữa cả slide.** Đặt `justify-content: center` lên `.slide` làm tiêu đề trôi theo nội dung. Winnie muốn tiêu đề giữ chỗ cố định và chỉ nội dung căn giữa vùng content.
+- **Hàng có nhiều khối cao thấp khác nhau** (hình SVG bên cạnh các khung chữ): `align-items: center`, không `flex-start`.
+- **Hai card hoặc khung đặt cạnh nhau để so sánh phải cùng chiều cao.** Đặt `height` cố định đủ cho khối dài hơn, `display:flex; flex-direction:column; justify-content:center`, để nội dung dài ngắn khác nhau không làm khung cao thấp khác nhau.
+- **Kicker màu `--ink`** trên mọi slide thường và dòng năm ở bìa (không dùng sienna). Kicker trên section divider nền tối giữ màu ochre để đọc được.
+- **Card bên trong specimen** dùng `.frame` (bo 22px, viền 2px ink), không dùng ô viền xám bo 12px. Card nền `--ink` hay chữ vàng cũng không dùng.
+- **Hàng trạng thái** (default, hover, disabled…) phải khác nhau nhìn thấy được (viền nhạt cho disabled, nét đứt cho loading hoặc empty), vì nếu giống hệt nhau thì slide không nói được gì.
+
 ## Bìa
 
 - **Nhãn trên bìa** là giai đoạn của design process: Discover, Define, Develop hoặc Deliver, lấy từ thư mục của lesson (`01-discover` đến `04-deliver`). Không dùng "Day N" hay "Sau bài X".
