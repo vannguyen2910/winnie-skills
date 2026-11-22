@@ -23,7 +23,7 @@ Luôn đọc `project/README.md` của DS này bằng Artifact tool (action read
 4. **Điền nội dung** theo README: một ý một slide; kicker, số 01/02/03, callout "Ví dụ"; card, illustration line-art, token cỡ chữ; icon chỉ lấy từ fonts.google.com/icons (Material Symbols Rounded) hoặc `<x-icon>`, không emoji. Ngoại lệ: khung icon của slide What/Why/When và mọi icon đặt trong khung riêng dùng line-art (xem "Slide What/Why/When").
 5. **Viết speaker notes** cho từng slide theo định dạng bên dưới.
 6. **Biên tập tiếng Việt** (bắt buộc với mọi nội dung tiếng Việt, gồm cả speaker notes), theo thứ tự: `translationese-cleaner-vi`, `style-guide-vi`, `grammar-checker-vi`. Gọi bằng tên đầy đủ có tiền tố (`vietnamese-writing:translationese-cleaner-vi`, `vietnamese-writing:style-guide-vi`, `vietnamese-writing:grammar-checker-vi`). Không sửa code, URL, tên sản phẩm. Dùng dấu nháy cong “ ” và ’ trong chữ người đọc.
-7. **Kiểm tra:** tương phản WCAG 2.1 AA, không emoji, không hard-code font hay cỡ chữ ngoài token. Chữ nhỏ nhất: 24px (xem mục giới hạn định dạng).
+7. **Kiểm tra:** tương phản WCAG 2.1 AA, không emoji, không hard-code font hay cỡ chữ ngoài token. Chữ nhỏ nhất: 24px (xem mục giới hạn định dạng). Chạy `python3 scripts/check_cards.py <thư mục slides>` để bắt card nền đen, vàng hoặc tím nhạt (card phải cùng cấp); sơ đồ có một node gốc đen thì bỏ qua dòng đó.
 8. **Giao:** gửi link ngay sau khi hoàn tất hoặc sửa xong, không đợi hỏi. Nói rõ phần chưa kiểm tra (ví dụ chưa xem trước giao diện).
 9. **Đồng bộ lesson:** nếu thứ tự hay nội dung slide đổi, cập nhật `*-slide-outline.md` và `*-lesson.md` trong cùng lượt (theo quy tắc sync của repo).
 
@@ -137,6 +137,7 @@ Slide "X là gì?" phải theo layout Method của `templates/slide-deck/SlideDe
 - **Không căn giữa cả slide.** Đặt `justify-content: center` lên `.slide` làm tiêu đề trôi theo nội dung. Winnie muốn tiêu đề giữ chỗ cố định và chỉ nội dung căn giữa vùng content.
 - **Hàng có nhiều khối cao thấp khác nhau** (hình SVG bên cạnh các khung chữ): `align-items: center`, không `flex-start`.
 - **Hai card hoặc khung đặt cạnh nhau để so sánh phải cùng chiều cao.** Đặt `height` cố định đủ cho khối dài hơn, `display:flex; flex-direction:column; justify-content:center`, để nội dung dài ngắn khác nhau không làm khung cao thấp khác nhau.
+- **Card trong cùng một hàng phải cùng cấp.** Mọi card nền trắng, viền 2px ink, không card nào nền đen, vàng hay tím nhạt. Nhấn mạnh bằng nội dung: số hoặc nhãn màu tím, icon ✓ và ✕, hoặc một dòng chốt bên dưới. Cả hàng so sánh hai bên cũng vậy. Ngoại lệ duy nhất: trong sơ đồ (tree, flow), một node gốc nền đen chữ trắng, các node còn lại trắng. Khi sửa deck cũ, quét `background:#1A1325`, `#F5D028`, `#EAE0FF` trên các `div` có `border-radius:22px` và đổi về trắng, chữ trắng thành mực, nhãn vàng thành tím đậm `#4A24C4`.
 - **Kicker màu `--ink`** trên mọi slide thường và dòng năm ở bìa (không dùng sienna). Kicker trên section divider nền tối giữ màu ochre để đọc được.
 - **Card bên trong specimen** dùng `.frame` (bo 22px, viền 2px ink), không dùng ô viền xám bo 12px. Card nền `--ink` hay chữ vàng cũng không dùng.
 - **Hàng trạng thái** (default, hover, disabled…) phải khác nhau nhìn thấy được (viền nhạt cho disabled, nét đứt cho loading hoặc empty), vì nếu giống hệt nhau thì slide không nói được gì.
