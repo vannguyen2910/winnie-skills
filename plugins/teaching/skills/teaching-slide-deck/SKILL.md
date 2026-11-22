@@ -23,7 +23,7 @@ Luôn đọc `project/README.md` của DS này bằng Artifact tool (action read
 4. **Điền nội dung** theo README: một ý một slide; kicker, số 01/02/03, callout "Ví dụ"; card, illustration line-art, token cỡ chữ; icon chỉ lấy từ fonts.google.com/icons (Material Symbols Rounded) hoặc `<x-icon>`, không emoji. Ngoại lệ: khung icon của slide What/Why/When và mọi icon đặt trong khung riêng dùng line-art (xem "Slide What/Why/When").
 5. **Viết speaker notes** cho từng slide theo định dạng bên dưới.
 6. **Biên tập tiếng Việt** (bắt buộc với mọi nội dung tiếng Việt, gồm cả speaker notes), theo thứ tự: `translationese-cleaner-vi`, `style-guide-vi`, `grammar-checker-vi`. Gọi bằng tên đầy đủ có tiền tố (`vietnamese-writing:translationese-cleaner-vi`, `vietnamese-writing:style-guide-vi`, `vietnamese-writing:grammar-checker-vi`). Không sửa code, URL, tên sản phẩm. Dùng dấu nháy cong “ ” và ’ trong chữ người đọc.
-7. **Kiểm tra:** tương phản WCAG 2.1 AA, không emoji, không hard-code font hay cỡ chữ ngoài token. Chữ nhỏ nhất: 24px (xem mục giới hạn định dạng).
+7. **Kiểm tra:** tương phản WCAG 2.1 AA, không emoji, không hard-code font hay cỡ chữ ngoài token. Chữ nhỏ nhất: 24px (xem mục giới hạn định dạng). Chạy `python3 scripts/check_cards.py <thư mục slides>` để bắt card nền đen, vàng hoặc tím nhạt (card phải cùng cấp); sơ đồ có một node gốc đen thì bỏ qua dòng đó.
 8. **Giao:** gửi link ngay sau khi hoàn tất hoặc sửa xong, không đợi hỏi. Nói rõ phần chưa kiểm tra (ví dụ chưa xem trước giao diện).
 9. **Đồng bộ lesson:** nếu thứ tự hay nội dung slide đổi, cập nhật `*-slide-outline.md` và `*-lesson.md` trong cùng lượt (theo quy tắc sync của repo).
 
@@ -34,6 +34,7 @@ Luôn đọc `project/README.md` của DS này bằng Artifact tool (action read
 3. `project/deck.css` khai báo mọi token đang dùng (`:root { --ink: ...; }`) và các class layout. Slide chỉ dùng class, không dùng `#id`. Không dùng `@import`; font khai báo trong `faces` của `deck.json` (Be Vietnam Pro, Inter, JetBrains Mono qua Google Fonts cho deck tiếng Việt).
 4. Mỗi slide là một file `project/slides/<id>.html` có đúng một `<section id class="slide ...">`, speaker notes trong một `<aside>` ở cuối.
 5. Thứ tự: viết `deck.json` đầu tiên (đủ `order`), rồi `deck.css` và slide bìa, lưu ba file cùng một lượt, sau đó các slide còn lại.
+6. **Slide mới bắt đầu từ mẫu, không tự vẽ layout.** Đọc `project/templates/slide-deck/lesson-patterns/README.md` trong Design System, rồi copy mẫu gần nhất (`method-what-why-when`, `cards-3-icons`, `cards-3-numbered`, `steps-vertical`, `compare-2`, `code-and-list`) và chỉ đổi nội dung. Mẫu đã có click reveal và kích thước pin đúng. Kiểu slide chưa có mẫu thì tra bảng "Slide chuẩn trong các deck Lesson" trong cùng README, đọc slide đó ở deck Lesson rồi copy cấu trúc, và báo Winnie để thêm mẫu mới vào Design System.
 
 ### Giới hạn của định dạng Slides (khác README Design System)
 
@@ -128,7 +129,7 @@ Slide "X là gì?" phải theo layout Method của `templates/slide-deck/SlideDe
 
 **Icon line-art:** SVG `viewBox="0 0 200 140"`, hiển thị `width 240, height 168`, nét `#1a1325` dày 1.7, `fill:none`, đầu nét và góc bo tròn, không tô màu, không gradient, có `role="img"` và `aria-label`. Vẽ tay bằng hình cơ bản (ví dụ bảng kiểm với dấu tích, hình người trong vòng tròn, hình trụ dữ liệu, bóng đèn, đường đi nối ba nút). Không dùng icon Material Symbols đặc (nét đầy) trong các khung này.
 
-Đã áp cho: Lesson 1 `hub-purpose`; Lesson 3 `hub-what`, `journey-what`, `opp-what`, `persona-what`; Lesson 4 `hmw-what`, `processmap-what`, `sketch-what`, `userflow-what`; Lesson 6 `what-audit`, `what-test`, `what-a11y`. Chưa tìm thấy slide kiểu này ở Lesson 2 và 5; kiểu thẻ What/Why/Ẩn dụ (`github-what`, `md-file`) khác layout Method nên để nguyên.
+Đã áp cho: Lesson 1 `hub-purpose`; Lesson 3 `hub-what`, `journey-what`, `opp-what`, `persona-what`; Lesson 4 `hmw-what`, `processmap-what`, `sketch-what`, `userflow-what`; Lesson 2 `s10`, `s27`, `s30`, `s51`, `s61`; Lesson 6 `what-audit`, `what-test`, `what-a11y`. Lesson 5 không có slide kiểu này (các slide "X là gì?" ở đó có bullet bên trái và hình bên phải, layout khác); kiểu thẻ What/Why/Ẩn dụ (`github-what`, `md-file`) khác layout Method nên để nguyên.
 
 ## Bố cục dọc và chi tiết hình ảnh đã chốt
 
@@ -136,6 +137,7 @@ Slide "X là gì?" phải theo layout Method của `templates/slide-deck/SlideDe
 - **Không căn giữa cả slide.** Đặt `justify-content: center` lên `.slide` làm tiêu đề trôi theo nội dung. Winnie muốn tiêu đề giữ chỗ cố định và chỉ nội dung căn giữa vùng content.
 - **Hàng có nhiều khối cao thấp khác nhau** (hình SVG bên cạnh các khung chữ): `align-items: center`, không `flex-start`.
 - **Hai card hoặc khung đặt cạnh nhau để so sánh phải cùng chiều cao.** Đặt `height` cố định đủ cho khối dài hơn, `display:flex; flex-direction:column; justify-content:center`, để nội dung dài ngắn khác nhau không làm khung cao thấp khác nhau.
+- **Card trong cùng một hàng phải cùng cấp.** Mọi card nền trắng, viền 2px ink, không card nào nền đen, vàng hay tím nhạt. Nhấn mạnh bằng nội dung: số hoặc nhãn màu tím, icon ✓ và ✕, hoặc một dòng chốt bên dưới. Cả hàng so sánh hai bên cũng vậy. Ngoại lệ duy nhất: trong sơ đồ (tree, flow), một node gốc nền đen chữ trắng, các node còn lại trắng. Khi sửa deck cũ, quét `background:#1A1325`, `#F5D028`, `#EAE0FF` trên các `div` có `border-radius:22px` và đổi về trắng, chữ trắng thành mực, nhãn vàng thành tím đậm `#4A24C4`.
 - **Kicker màu `--ink`** trên mọi slide thường và dòng năm ở bìa (không dùng sienna). Kicker trên section divider nền tối giữ màu ochre để đọc được.
 - **Card bên trong specimen** dùng `.frame` (bo 22px, viền 2px ink), không dùng ô viền xám bo 12px. Card nền `--ink` hay chữ vàng cũng không dùng.
 - **Hàng trạng thái** (default, hover, disabled…) phải khác nhau nhìn thấy được (viền nhạt cho disabled, nét đứt cho loading hoặc empty), vì nếu giống hệt nhau thì slide không nói được gì.
@@ -165,6 +167,8 @@ Mục tiêu: Winnie đọc là nói được ngay, scan nhanh khi đang đứng 
 - Mỗi đoạn 1-3 câu. Câu ngắn, viết như lời nói, trực tiếp, có ví dụ cụ thể thay vì khái niệm trừu tượng.
 - Cả bản notes khoảng 150-200 từ; chỉ dài hơn với slide dày nội dung.
 - Không thêm phần thời gian trừ khi Winnie yêu cầu.
+- Xưng hô trong notes: dùng "chúng ta" cho người dạy và học viên, không dùng "bạn". "Mình" vẫn là người dạy tự xưng. Lời thoại hỏi người được phỏng vấn trong dấu “ ” giữ nguyên "bạn".
+- Slide hiện từng khối theo click: viết notes theo đúng thứ tự khối hiện ra (khối 1, rồi khối 2…), ví dụ minh hoạ đặt ngay sau khối nó minh hoạ, câu chuyển tiếp và câu hỏi cho lớp ở cuối. Winnie không muốn phải đọc lướt notes để tự sắp lại thứ tự nói.
 - Chỉ dùng các đoạn slide thực sự cần. Slide mở đầu hoặc slide chuyển ý có thể chỉ cần câu nối và câu hỏi.
 
 ### Ví dụ chuẩn (mục tiêu đầu ra)
