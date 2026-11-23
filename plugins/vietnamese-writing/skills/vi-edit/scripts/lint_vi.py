@@ -22,7 +22,7 @@ TRANSLATED = [
     "chọn vấn đề đáng giải", "đưa input rõ ràng", "cùng định nghĩa requirement",
 ]
 TRANSLATED_RE = [(re.compile(r"\bverify\b", re.I), "verify → kiểm tra"),
-                 (re.compile(r"\bdraft\b", re.I), "draft → soạn nháp / bản nháp"),
+                 (re.compile(r"(?<![\w-])draft(?![\w:.-])", re.I), "draft → soạn nháp / bản nháp"),
                  (re.compile(r"\bAI tool\b"), "AI tool → công cụ AI")]
 # Chữ đệm khi nói
 FILLER = ["thì á", "thì là", "cho nên là", "tại vì", "nói chung là", "kiểu như", "có nghĩa là", "Nhớ nha", "Đúng rồi!"]
@@ -103,8 +103,13 @@ def lint_text(path, text, args):
             staccato(notes, sid + " [notes]", out)
             pronouns(notes, sid + " [notes]", out)
     else:
-        for i, l in enumerate(text.splitlines(), 1):
-            if l.strip().startswith("```"): continue
+        lines = text.splitlines()
+        start = 0
+        if lines and lines[0].strip() == "---":  # bỏ qua YAML front matter
+            for j in range(1, len(lines)):
+                if lines[j].strip() == "---": start = j + 1; break
+        for i, l in enumerate(lines, 1):
+            if i <= start or l.strip().startswith("```"): continue
             check_line(l, f"{os.path.basename(path)}:{i}", "notes", out)
     return out
 
