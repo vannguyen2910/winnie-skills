@@ -1,6 +1,6 @@
 ---
 name: vietnamese-copy-polish
-description: Polish Vietnamese marketing copy so it reads like a native writer and fits each platform. Checks missing diacritics, long sentences, filler, banned punctuation (en dash and em dash), weak hooks and missing calls to action, then rewrites for Facebook, TikTok, YouTube, Zalo, email or a website. Use when the user asks to "sửa văn", "viết lại cho hay", "chuốt caption", "kiểm tra bài đăng", "viết content tiếng Việt", or shares Vietnamese copy that feels machine translated.
+description: Polish Vietnamese marketing copy so it reads like a native writer and fits each platform. Checks missing diacritics, long sentences, filler, banned punctuation (en dash and em dash), weak hooks and missing calls to action, then rewrites for Facebook, TikTok, YouTube, Zalo, email or a website. ONLY for marketing copy and social posts. NOT for lesson, slide, speaker notes, outline or practice content: use vi-edit for those. Use when the user asks to "sửa văn", "viết lại cho hay", "chuốt caption", "kiểm tra bài đăng", "viết content tiếng Việt", or shares Vietnamese copy that feels machine translated.
 license: MIT
 metadata:
   author: ducpt

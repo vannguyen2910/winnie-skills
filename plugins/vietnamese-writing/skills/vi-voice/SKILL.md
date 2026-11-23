@@ -11,7 +11,11 @@ Viết hoặc viết lại nội dung tiếng Việt theo đúng văn phong củ
 
 Đọc toàn bộ file này trước khi viết bất cứ câu nào:
 
-`/Users/winnie.nguyen/library/CloudStorage/GoogleDrive-nguyenphuctuongvan@gmail.com/My Drive/03_Mentoring/_system/rules/vi-voice.md`
+`references/vi-voice-rules.md` (bản sao ngay trong skill này, dùng được ở mọi phiên và mọi máy).
+
+Bản gốc nằm trên Drive: `~/Library/CloudStorage/GoogleDrive-*/My Drive/03_Mentoring/_system/rules/vi-voice.md`. Nếu máy có bản gốc và bản gốc mới hơn bản sao thì dùng bản gốc, rồi chạy `../vi-edit/scripts/sync_rules.sh` để bản sao không lệch.
+
+Khi cần chạy cả chuỗi biên tập (kèm lint), dùng skill `vi-edit`, không gọi lẻ từng skill.
 
 Nếu làm việc trong thư mục 03_Mentoring, đọc thêm `CLAUDE.md` ở gốc (quy tắc sync lesson và slide outline, không tên tool AI cụ thể, không tên mentee). Nếu cần cấu trúc riêng của khoá AI Prototype Development, đọc `programs/online-course/AI Prototype Development/writing-style-guide.md`. `vi-voice.md` thắng khi có mâu thuẫn về giọng văn và từ vựng.
 
