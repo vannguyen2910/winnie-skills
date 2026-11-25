@@ -1,6 +1,6 @@
 # Whiteboard data (findings JSON)
 
-Input of `scripts/build_whiteboard.py`. Save it as `work/heuristic-evaluation.json` in the project. Full example: `../examples/grab-food-delivery.json`.
+Input of `scripts/build_whiteboard.py`. Save it as `work/heuristic-evaluation/findings.json` in the project. Full example: `../examples/grab-food-delivery.json`.
 
 ```json
 {
