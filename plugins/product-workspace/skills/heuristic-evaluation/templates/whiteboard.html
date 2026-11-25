@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__ heuristic whiteboard</title>
+<style>
+  :root { color-scheme: light; --ink:#1d1d1f; --muted:#5b5b60; --board:#f4f4f1; --dot:#d9d9d4; }
+  * { box-sizing: border-box; }
+  html, body { margin:0; height:100%; font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color:var(--ink); background:var(--board); }
+  #viewport { position:absolute; inset:0; overflow:hidden; cursor:grab; touch-action:none;
+    background-color:var(--board); background-image:radial-gradient(var(--dot) 1.2px, transparent 1.2px); background-size:28px 28px; }
+  #viewport.drag { cursor:grabbing; }
+  #board { position:absolute; left:0; top:0; transform-origin:0 0; will-change:transform; }
+  #lines { position:absolute; left:0; top:0; pointer-events:none; overflow:visible; }
+  h1.title { position:absolute; left:60px; top:36px; margin:0; font-size:84px; line-height:1; font-weight:800; letter-spacing:-1px; }
+  .sub { position:absolute; left:64px; top:136px; font-size:22px; color:var(--muted); }
+  .band { position:absolute; left:60px; height:44px; background:#111; color:#fff; font-size:18px; font-weight:600; display:flex; align-items:center; padding:0 18px; border-radius:2px; }
+  .screen { position:absolute; width:260px; }
+  .screen .cap { position:absolute; left:0; top:-26px; font-size:13px; font-weight:600; color:var(--muted); white-space:nowrap; }
+  .screen .frame { position:relative; width:100%; aspect-ratio:1180/2556; border-radius:18px; overflow:hidden; background:#fff; box-shadow:0 1px 3px rgba(0,0,0,.18), 0 8px 24px rgba(0,0,0,.10); border:1px solid #d7d7d2; }
+  .screen img { display:block; width:100%; height:100%; object-fit:cover; user-select:none; -webkit-user-drag:none; }
+  .pin { position:absolute; width:26px; height:26px; margin:-13px 0 0 -13px; border-radius:50%; background:var(--ink); color:#fff; font-size:11px; font-weight:700;
+    display:flex; align-items:center; justify-content:center; border:3px solid var(--c); box-shadow:0 1px 4px rgba(0,0,0,.45); cursor:pointer; z-index:3; transition:opacity .15s, transform .15s; }
+  .note { position:absolute; width:290px; padding:12px 14px 13px; background:var(--c); color:#2b2412; border-radius:3px; cursor:pointer;
+    box-shadow:0 1px 2px rgba(0,0,0,.2), 0 6px 14px rgba(0,0,0,.14); transition:opacity .15s, box-shadow .15s; }
+  .note::after { content:""; position:absolute; right:0; bottom:0; width:18px; height:18px; background:linear-gradient(135deg, rgba(0,0,0,.14) 50%, transparent 50%); border-top-left-radius:6px; }
+  .note .hd { display:flex; justify-content:space-between; align-items:baseline; gap:8px; font-size:12px; }
+  .note .hd b { font-size:13px; letter-spacing:.3px; }
+  .note .hd span { font-weight:600; opacity:.8; }
+  .note h3 { margin:6px 0 8px; font-size:15px; line-height:1.25; }
+  .note dt { font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.5px; opacity:.7; margin-top:7px; }
+  .note dd { margin:1px 0 0; font-size:12.5px; line-height:1.4; }
+  .path { fill:none; stroke-width:1.6; opacity:.6; transition:opacity .15s, stroke-width .15s; }
+  .dim.note, .dim.pin { opacity:.22; }
+  .dim.path { opacity:.07; }
+  .sel.note { box-shadow:0 0 0 3px var(--ink), 0 10px 24px rgba(0,0,0,.25); z-index:5; }
+  .sel.pin { transform:scale(1.25); z-index:6; }
+  .sel.path { opacity:1; stroke-width:2.6; }
+  #ui { position:fixed; left:14px; top:14px; z-index:20; display:flex; flex-direction:column; gap:8px; max-width:calc(100vw - 28px); }
+  .panel { background:rgba(255,255,255,.96); border:1px solid #d7d7d2; border-radius:10px; padding:8px 10px; box-shadow:0 2px 10px rgba(0,0,0,.10); font-size:12.5px; }
+  .row { display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+  button { font:inherit; font-size:12.5px; color:var(--ink); background:#fff; border:1px solid #c9c9c3; border-radius:7px; padding:5px 10px; cursor:pointer; min-height:30px; }
+  button:hover { background:#efefea; }
+  button:focus-visible { outline:2px solid #0a64d8; outline-offset:1px; }
+  .zoom { min-width:44px; text-align:center; font-variant-numeric:tabular-nums; color:var(--muted); }
+  .sw { display:inline-flex; align-items:center; gap:5px; margin-right:6px; }
+  .sw i { width:14px; height:14px; border-radius:3px; display:inline-block; box-shadow:inset 0 0 0 1px rgba(0,0,0,.2); }
+  .off { display:none !important; }
+  .flt { display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--muted); }
+  select { font:inherit; font-size:12.5px; color:var(--ink); background:#fff; border:1px solid #c9c9c3; border-radius:7px; padding:5px 8px; min-height:30px; cursor:pointer; }
+  select:focus-visible { outline:2px solid #0a64d8; outline-offset:1px; }
+  .hint { color:var(--muted); font-size:11.5px; margin-top:6px; }
+</style>
+</head>
+<body>
+<div id="viewport">
+  <div id="board">
+    <svg id="lines"></svg>
+  </div>
+</div>
+<div id="ui">
+  <div class="panel">
+    <div class="row">
+      <button id="zout" aria-label="Zoom out">−</button>
+      <span class="zoom" id="zlabel">100%</span>
+      <button id="zin" aria-label="Zoom in">+</button>
+      <button id="fit">Fit all</button>
+      <label class="flt">Journey
+        <select id="jsel" aria-label="Filter by journey">
+          <option value="all">All journeys</option>
+        </select></label>
+    </div>
+    <div class="row" style="margin-top:8px" id="legend"></div>
+    <div class="hint">Scroll or drag to move · Ctrl/⌘ + scroll or pinch to zoom · Click a note or pin to follow it</div>
+  </div>
+</div>
+
+<script>
+"use strict";
+const PRI = {
+  P1:"Visibility of system status", P2:"Match between system and the real world", P3:"User control and freedom",
+  P4:"Consistency and standards", P5:"Error prevention", P6:"Recognition rather than recall",
+  P7:"Flexibility and efficiency of use", P8:"Aesthetic and minimalist design",
+  P9:"Help users recognise, diagnose and recover from errors", P10:"Help and documentation"
+};
+const SEV = { 0:{n:"Not a problem", c:"#E4E4DE"}, 1:{n:"Cosmetic", c:"#FFE27A"}, 2:{n:"Minor", c:"#FFB35C"}, 3:{n:"Major", c:"#FF7F73"}, 4:{n:"Catastrophe", c:"#E5484D"} };
+const DATA = __DATA__;
+const BASE = DATA.assetsBase || "../assets/";
+const JOURNEYS = DATA.journeys;
+const IMGS = __IMGS__; // small embedded copies, used when BASE cannot be read (static preview)
+const JIDX = Object.fromEntries(JOURNEYS.map((j, i) => [j.code, i]));
+const jOf = id => JIDX[id.split("-")[0]];
+
+// at = screen that carries the sticky note. pins = [screen, x, y] as fractions of the screenshot.
+const F = DATA.findings;
+
+const NS = "http://www.w3.org/2000/svg";
+const $ = id => document.getElementById(id);
+const viewport = $("viewport"), board = $("board"), lines = $("lines");
+const SW = 260, SH = SW * 2556 / 1180, NOTE_W = 290, GAP = 28, PAD = 56;
+const pad2 = n => String(n).padStart(2, "0");
+const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+
+// ---------- layout ----------
+const screens = {};           // id -> {x, y}
+const noteBox = {};           // n -> {x, y, w, h, el}
+const bands = [];
+let y = 200;
+const title = el("h1", "title", DATA.title); board.appendChild(title);
+board.appendChild(el("div", "sub", (DATA.subtitle ? DATA.subtitle + " · " : "") + "Heuristic evaluation · " + F.length + " findings · Nielsen’s 10 heuristics"));
+
+JOURNEYS.forEach((j, ji) => {
+  const band = el("div", "band", j.title); band.style.top = y + "px"; band.dataset.j = ji; board.appendChild(band);
+  const top = y + 44 + 64;
+  let x = PAD + 4, bottom = top + SH;
+  j.screens.forEach(([file, label], si) => {
+    const id = j.code + "-" + pad2(si + 1);
+    const wrap = el("div", "screen"); wrap.style.left = x + "px"; wrap.style.top = top + "px"; wrap.dataset.j = ji;
+    wrap.appendChild(el("div", "cap", j.code + " · " + pad2(si + 1) + " " + label));
+    const frame = el("div", "frame"); const img = new Image();
+    const key = j.dir + "/" + file + ".jpg";
+    // full-quality file from work/assets; if that path cannot load (static preview), use the small embedded copy
+    img.onerror = () => { img.onerror = null; img.src = IMGS[key]; };
+    img.src = BASE + key; img.alt = j.code + " · " + pad2(si + 1) + " " + label; img.draggable = false;
+    frame.appendChild(img); wrap.appendChild(frame); board.appendChild(wrap);
+    screens[id] = { x, y: top };
+    // pins
+    F.forEach(f => f.pins.forEach(p => { if (p[0] !== id) return;
+      const pin = el("div", "pin", String(f.n)); pin.dataset.n = f.n; pin.dataset.nj = jOf(f.at); pin.style.setProperty("--c", SEV[f.sev].c);
+      pin.style.left = (p[1] * 100) + "%"; pin.style.top = (p[2] * 100) + "%"; pin.title = "UX-" + pad2(f.n) + " " + f.t; frame.appendChild(pin); }));
+    // notes
+    const mine = F.filter(f => f.at === id).sort((a, b) => a.pins.find(p => p[0] === id)[2] - b.pins.find(p => p[0] === id)[2]);
+    let cursor = top;
+    mine.forEach(f => {
+      const n = el("div", "note"); n.dataset.n = f.n; n.dataset.j = ji; n.style.setProperty("--c", SEV[f.sev].c);
+      const hd = el("div", "hd"); hd.appendChild(el("b", null, "UX-" + pad2(f.n))); hd.appendChild(el("span", null, "Severity " + f.sev + " · " + SEV[f.sev].n)); n.appendChild(hd);
+      n.appendChild(el("h3", null, f.t));
+      const dl = el("dl");
+      [["Where on the screen", f.where], ["What the user sees", f.sees], ["Principle", f.pr.map(c => PRI[c]).join("; ")]].forEach(([k, v]) => { dl.appendChild(el("dt", null, k)); dl.appendChild(el("dd", null, v)); });
+      n.appendChild(dl);
+      const py = f.pins.find(p => p[0] === id)[2];
+      const ny = Math.max(cursor, top + py * SH - 40);
+      n.style.left = (x + SW + GAP) + "px"; n.style.top = ny + "px"; board.appendChild(n);
+      const h = n.offsetHeight; noteBox[f.n] = { x: x + SW + GAP, y: ny, w: NOTE_W, h };
+      cursor = ny + h + 16;
+    });
+    bottom = Math.max(bottom, cursor);
+    x += SW + (mine.length ? GAP + NOTE_W : 0) + PAD;
+  });
+  band.style.width = (x - 60 + 4) + "px";
+  bands.push({ x: 60, y, w: x - 60 + 4, h: bottom - y + 24 });
+  y = bottom + 90;
+});
+const boardW = Math.max(...bands.map(b => b.w)) + 120, boardH = y;
+board.style.width = boardW + "px"; board.style.height = boardH + "px";
+bands.forEach(b => { b.cw = b.w; b.w = boardW - 120; });
+document.querySelectorAll(".band").forEach(b => b.style.width = (boardW - 120) + "px");
+
+// ---------- connectors ----------
+lines.setAttribute("width", boardW); lines.setAttribute("height", boardH);
+F.forEach(f => {
+  const nb = noteBox[f.n];
+  f.pins.forEach(p => {
+    const s = screens[p[0]], px = s.x + p[1] * SW, py = s.y + p[2] * SH;
+    const left = px < nb.x;
+    const ex = left ? nb.x : nb.x + nb.w, ey = nb.y + Math.min(nb.h / 2, 60);
+    const dx = Math.max(40, Math.abs(ex - px) * 0.45) * (left ? 1 : -1) * -1;
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("d", `M${px},${py} C${px - dx},${py} ${ex + dx},${ey} ${ex},${ey}`);
+    path.setAttribute("class", "path"); path.setAttribute("stroke", "#1d1d1f"); path.dataset.n = f.n; path.dataset.pj = jOf(p[0]); path.dataset.nj = jOf(f.at);
+    lines.appendChild(path);
+  });
+});
+
+// ---------- selection ----------
+let current = null;
+function select(n) {
+  current = (n === current) ? null : n;
+  board.querySelectorAll(".note,.pin,.path").forEach(e => {
+    const on = current != null && +e.dataset.n === current;
+    e.classList.toggle("sel", on); e.classList.toggle("dim", current != null && !on);
+  });
+}
+
+// ---------- pan and zoom ----------
+let s = 1, tx = 0, ty = 0;
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const MINZ = 0.05;
+function apply() { board.style.transform = `translate(${tx}px,${ty}px) scale(${s})`; $("zlabel").textContent = Math.round(s * 100) + "%"; }
+function zoomAt(cx, cy, f) { const ns = clamp(s * f, 0.08, 3); tx = cx - (cx - tx) * ns / s; ty = cy - (cy - ty) * ns / s; s = ns; apply(); }
+function showRect(r, margin = 30) {
+  const vw = viewport.clientWidth, vh = viewport.clientHeight;
+  s = clamp(Math.min((vw - 2 * margin) / r.w, (vh - 2 * margin) / r.h), 0.08, 3);
+  tx = (vw - r.w * s) / 2 - r.x * s; ty = (vh - r.h * s) / 2 - r.y * s; apply();
+}
+const fitAll = () => showRect({ x: 0, y: 0, w: boardW, h: boardH });
+$("fit").onclick = fitAll;
+$("zin").onclick = () => zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 1.25);
+$("zout").onclick = () => zoomAt(viewport.clientWidth / 2, viewport.clientHeight / 2, 0.8);
+const jsel = $("jsel");
+JOURNEYS.forEach((j, i) => { const o = document.createElement("option"); o.value = i; o.textContent = j.title.replace(/^Journey\s*/i, ""); jsel.appendChild(o); });
+jsel.onchange = () => {
+  const j = jsel.value === "all" ? null : +jsel.value;
+  board.querySelectorAll(".band,.screen,.note").forEach(e => e.classList.toggle("off", j != null && +e.dataset.j !== j));
+  board.querySelectorAll(".pin").forEach(e => e.classList.toggle("off", j != null && +e.dataset.nj !== j));
+  board.querySelectorAll(".path").forEach(e => e.classList.toggle("off", j != null && (+e.dataset.pj !== j || +e.dataset.nj !== j)));
+  current = null; board.querySelectorAll(".sel,.dim").forEach(e => e.classList.remove("sel", "dim"));
+  if (j == null) fitAll(); else { const b = bands[j]; showRect({ x: b.x - 20, y: b.y - 20, w: b.cw + 40, h: b.h + 40 }); }
+  jsel.blur();
+};
+document.addEventListener("keydown", e => {
+  if (e.key === "+" || e.key === "=") $("zin").click(); else if (e.key === "-") $("zout").click();
+  else if (e.key === "0") fitAll(); else if (e.key === "Escape") { current = null; select(null); }
+});
+viewport.addEventListener("wheel", e => {
+  e.preventDefault();
+  if (e.ctrlKey || e.metaKey) zoomAt(e.clientX, e.clientY, Math.exp(-e.deltaY * 0.01));
+  else { tx -= e.deltaX; ty -= e.deltaY; apply(); }
+}, { passive: false });
+
+const ptrs = new Map(); let moved = 0, pinch = 0;
+viewport.addEventListener("pointerdown", e => {
+  if (e.target.closest("#ui")) return;
+  viewport.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  moved = 0; viewport.classList.add("drag");
+  if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = Math.hypot(a.x - b.x, a.y - b.y); }
+});
+viewport.addEventListener("pointermove", e => {
+  const p = ptrs.get(e.pointerId); if (!p) return;
+  if (ptrs.size === 2) {
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y);
+    if (pinch) zoomAt((a.x + b.x) / 2, (a.y + b.y) / 2, d / pinch); pinch = d; moved = 99; return;
+  }
+  const dx = e.clientX - p.x, dy = e.clientY - p.y; moved += Math.abs(dx) + Math.abs(dy);
+  p.x = e.clientX; p.y = e.clientY; tx += dx; ty += dy; apply();
+});
+const up = e => {
+  if (!ptrs.has(e.pointerId)) return; ptrs.delete(e.pointerId); pinch = 0;
+  if (!ptrs.size) viewport.classList.remove("drag");
+  if (e.type === "pointerup" && moved < 6 && !ptrs.size) {
+    const t = e.target.closest(".note,.pin");
+    if (t) select(+t.dataset.n); else if (current != null) select(current);
+  }
+};
+viewport.addEventListener("pointerup", up); viewport.addEventListener("pointercancel", up);
+
+// ---------- legend ----------
+const lg = $("legend");
+Object.entries(SEV).filter(([k]) => F.some(f => f.sev === +k)).forEach(([k, v]) => { const i = el("span", "sw"); const sq = el("i"); sq.style.background = v.c; i.appendChild(sq); i.appendChild(document.createTextNode("Severity " + k + " " + v.n)); lg.appendChild(i); });
+let touched = false;
+["wheel", "pointerdown", "keydown"].forEach(t => addEventListener(t, () => { touched = true; }, { once: true, passive: true }));
+addEventListener("resize", () => { if (!touched) fitAll(); });
+requestAnimationFrame(fitAll);
+</script>
+</body>
+</html>
