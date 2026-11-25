@@ -100,7 +100,9 @@ This skill produces a comprehensive package of five key documents, ensuring a st
 
 For HR professionals who need a complete training package immediately, use this streamlined workflow:
 
-#### Step 1: Gather 5 Essential Inputs (5 minutes)
+#### Step 1: Gather 5 Essential Inputs
+
+**Time:** 5 minutes
 
 Ask the user for these 5 key pieces of information:
 
@@ -119,7 +121,9 @@ Ask the user for these 5 key pieces of information:
 5. **Training Format**: How will it be delivered?
    - Example: "Online via Zoom with breakout rooms" or "In-person at company training center"
 
-#### Step 2: Generate Complete Package (10 minutes)
+#### Step 2: Generate Complete Package
+
+**Time:** 10 minutes
 
 Once you have the 5 inputs, automatically generate all 14 documents:
 

@@ -371,27 +371,37 @@ All generated documents meet these standards:
 
 #### Generated Course Structure
 
-**Module 1: Foundations of Remote Communication (90 min)**
+**Module 1: Foundations of Remote Communication**
+
+**Time:** 90 min
 - Introduction and icebreaker
 - Challenges of remote communication
 - Key principles of effective virtual communication
 - Activity: Communication audit
 
-**Module 2: Mastering Virtual Meetings (120 min)**
+**Module 2: Mastering Virtual Meetings**
+
+**Time:** 120 min
 - Planning and structuring virtual meetings
 - Facilitation techniques for engagement
 - Active listening in virtual settings
 - Activity: Mock meeting facilitation practice
 
-**Lunch Break (60 min)**
+**Lunch Break**
 
-**Module 3: Written Communication Excellence (90 min)**
+**Time:** 60 min
+
+**Module 3: Written Communication Excellence**
+
+**Time:** 90 min
 - Email best practices for clarity
 - Asynchronous communication tools
 - Documentation and transparency
 - Activity: Email rewriting workshop
 
-**Module 4: Building Remote Team Culture (90 min)**
+**Module 4: Building Remote Team Culture**
+
+**Time:** 90 min
 - Trust and connection in remote teams
 - Feedback in virtual environments
 - Creating rituals and routines
