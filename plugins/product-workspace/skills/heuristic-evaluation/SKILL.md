@@ -39,7 +39,7 @@ Do not leave loose `heuristic-*` files in `work/`.
    - Write the full heuristic name (Visibility of system status), not the code (P1).
    - Level 3 and 4 need a reason. Level 4 means the main task is blocked or money or data is lost: do not use it without that evidence.
    - Quote only text that is on the screen. Never invent a figure or a user reaction.
-3. **Write `work/heuristic-evaluation/index.md`** from `references/evaluation-template.md`. Keep exactly its sections. Do not add sections for limits, cross-journey findings, to-test lists or what works, unless the owner asks.
+3. **Write `work/heuristic-evaluation/index.md`** from `references/evaluation-template.md`. Keep exactly its sections. Write the body for readers, as the project's shared AI rules say: no file paths, tool or skill names, or item codes (O1, H2...) in the text; the `UX-` tags are the only codes. Say things in plain words, and keep file names only in the front matter. Do not add sections for limits, cross-journey findings, to-test lists or what works, unless the owner asks.
 4. **Cross-check the owner's possible breakdowns** (from the flow pages): confirmed, partly, or not checkable, with the tag. List new problems the owner did not name.
 5. **Build the whiteboard.** Write a findings JSON (schema in `references/whiteboard-data.md`; a full example is in `examples/grab-food-delivery.json`), then run:
    ```

@@ -16,11 +16,11 @@ Grab food delivery, Vietnam · iPhone · app v33437965 · English interface · w
 
 ## 1. What this is
 
-A first pass at "Validate the current experience". Every screen of the three journeys is checked against the 10 heuristics in `standards/principle-checks.md` and every problem is rated with `standards/severity-levels.md`. Screen references (J1 · 01 and so on) are the same as in `work/current-user-flow/`, and the images are in `work/assets/`.
+A first pass at validating the current experience of the app. Every screen of the three journeys is checked against Nielsen's 10 usability heuristics, and every problem is rated from 0 (not a problem) to 4 (catastrophe). Screen references such as J1 · 01 are the same as in the user flows.
 
-**The whiteboard** (`heuristic-whiteboard.html`, in this folder) draws the same findings on the screens, one sticky note and one pin per finding. Open it in a normal browser for sharp screenshots. The findings are also kept in `findings.json`; when a finding changes here, change it there too and rebuild the whiteboard.
+**The whiteboard** on this page draws the same findings on the screens, one sticky note and one pin per finding. Use the Journey list to show one journey at a time. Open it in a normal browser for sharp screenshots.
 
-**How it was made:** I looked at all 29 screenshots one by one (11 + 7 + 11) and checked them against the Figma overview board you sent. I also compared the result with the 15 possible breakdowns that you wrote in the three flow diagrams.
+**How it was made:** every screenshot was looked at one by one and checked against the Figma overview board. The result was also compared with the possible breakdowns written in the three flow diagrams.
 
 ## 2. Summary
 
@@ -69,7 +69,7 @@ A first pass at "Validate the current experience". Every screen of the three jou
 |---|---|---|---|---|---|---|
 | UX-21 | J3 · 01 to J3 · 06 | Red bottom sheet "GrabMore and save on delivery" | A sheet with a countdown covers the lower part of every tracking screen. The timer runs in real time (19:53 at 15:55, 12:42 at 16:02, 03:20 at 16:11). It cuts the order total ("₫67." in J3 · 01). Only a drag handle is visible, no close button | Aesthetic and minimalist design; User control and freedom | 3 | Breakdown 2 is confirmed. It is on screen the whole wait, it presses the user with a timer, and the user cannot clearly dismiss it |
 | UX-22 | J3 · 02, J3 · 06 | "Check this out while you wait" card | Hotel membership ads (Modern Village, IHG) appear between the status and the order or driver details. They are unrelated to a food order. The way to hide them is a small ⋮ | Aesthetic and minimalist design | 2 | Together with the GrabUnlimited banner and the Favourites prompt, the status competes with four promotions |
-| UX-23 | J3 · 01, J3 · 02, J3 · 03, J3 · 05 | Progress bar under the ETA | Four icons (G, pot, scooter, house) with no text. Progress is shown only by green fill. The text above changes, but the bar alone does not name the stage | Visibility of system status; Match between system and the real world | 2 | Meaning rests on icon and colour only (see `context/accessibility-rules.md`) |
+| UX-23 | J3 · 01, J3 · 02, J3 · 03, J3 · 05 | Progress bar under the ETA | Four icons (G, pot, scooter, house) with no text. Progress is shown only by green fill. The text above changes, but the bar alone does not name the stage | Visibility of system status; Match between system and the real world | 2 | Meaning rests on icon and colour only (the accessibility rules say meaning must not rest on colour alone) |
 | UX-24 | J3 · 01 to J3 · 05 | ETA "4:12 - 4:27 PM" | A 15-minute window stays unchanged from "We've got your order" to "Your order's ready for delivery" (16:02). It becomes a point ("Arriving by 4:17 PM") only on the map screen. The app shows 12-hour time while the phone clock is 24-hour | Visibility of system status; Consistency and standards | 2 | Breakdown 1 is confirmed. Hard to plan around, but the user is still informed |
 | UX-25 | J3 · 04 | Order card under the status | The order appears only as one thumbnail with a "View order summary" link. A Favourites prompt and an "Offers" row with a chevron sit inside the card of an order that is already placed | Recognition rather than recall; Match between system and the real world | 2 | The user cannot check the items at a glance. It is unclear what "Offers" can do after paying |
 | UX-26 | J3 · 05 Map | Map edges; teal tag "GF-091"; speech bubble on the right | The driver icon is cut by the left edge and the address bubble ("Lô C, cầu thang đ…") by the right edge, so the map does not frame the driver and the destination. "GF-091" has no label. Many shop names clutter the map | Visibility of system status; Match between system and the real world | 2 | The map is the part users look at most while waiting |
@@ -78,7 +78,7 @@ A first pass at "Validate the current experience". Every screen of the three jou
 | UX-29 | J3 · 07, J3 · 08 | Blue link under "Total paid"; the video block; "Submit" | Rating, feedback chips ("Attitu…" cut off), tip and "Submit" share one long screen, and a large video ad fills the lower half of J3 · 07. "GrabCoins +0" has no explanation. "Submit" does not show whether a tip is included | Aesthetic and minimalist design; Visibility of system status; Error prevention | 2 | Breakdown 4 is partly confirmed |
 | UX-30 | J3 · 09, J3 · 10, J3 · 11 | Blue text links; "Booking ID"; fee line; "Profile" | "Rate order", "Reorder" and "View details" are small blue text links. "Rate order" is still shown at 16:14, the same minute as the rating, with no confirmation seen. "Booking ID A-A47BS…" and "GF-091" are internal codes. "Applicable fees 20.000" merges the two fees from checkout. "Profile: Personal" is not explained | Visibility of system status; Match between system and the real world; Recognition rather than recall | 2 | Small targets and unclear labels on the screen users return to for reorder and help |
 
-## 4. Cross-check with your 15 possible breakdowns
+## 4. Cross-check with your possible breakdowns
 
 | Flow | Your breakdown | Result from the screens | See |
 |---|---|---|---|

@@ -16,11 +16,11 @@ media:
 
 ## 1. What this is
 
-A first pass at "Validate the current experience". Every screen of the journeys is checked against the 10 heuristics in `standards/principle-checks.md` and every problem is rated with `standards/severity-levels.md`. Screen references (J1 · 01 and so on) are the same as in `work/current-user-flow/`, and the images are in `work/assets/`.
+A first pass at validating the current experience of the app. Every screen of the journeys is checked against Nielsen's 10 usability heuristics, and every problem is rated from 0 (not a problem) to 4 (catastrophe). Screen references such as J1 · 01 are the same as in the user flows.
 
-**The whiteboard** (`heuristic-whiteboard.html`, in this folder) draws the same findings on the screens, one sticky note and one pin per finding. Open it in a normal browser for sharp screenshots. The findings are also kept in `findings.json`; when a finding changes here, change it there too and rebuild the whiteboard.
+**The whiteboard** on this page draws the same findings on the screens, one sticky note and one pin per finding. Use the Journey list to show one journey at a time. Open it in a normal browser for sharp screenshots.
 
-**How it was made:** all <N> screenshots were looked at one by one and compared with the owner's possible breakdowns in the flow diagrams.
+**How it was made:** every screenshot was looked at one by one and checked against the owner's overview board (if there is one). The result was also compared with the possible breakdowns written in the flow diagrams.
 
 ## 2. Summary
 
