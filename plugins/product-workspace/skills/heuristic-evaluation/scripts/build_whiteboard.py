@@ -2,11 +2,11 @@
 """Build the heuristic-evaluation whiteboard (one HTML file) from a findings JSON.
 
 Usage:
-  python3 build_whiteboard.py findings.json --out-dir work/heuristic-whiteboard [--assets-dir work/assets] [--no-embed]
+  python3 build_whiteboard.py findings.json --out-dir work/heuristic-evaluation [--assets-dir work/assets] [--no-embed]
 
 Reads templates/whiteboard.html (next to this script's parent folder), checks the JSON,
 embeds small fallback copies of the screenshots (needs macOS `sips`), writes
-<out-dir>/heuristic-whiteboard.html and, if missing, <out-dir>/index.md.
+<out-dir>/heuristic-whiteboard.html. The folder is work/heuristic-evaluation/, which also holds index.md (the findings document) and findings.json.
 """
 import argparse, base64, glob, html, json, os, re, shutil, subprocess, sys, tempfile
 
@@ -94,14 +94,14 @@ def main():
     ap.add_argument("--out-dir", required=True)
     ap.add_argument("--assets-dir")
     ap.add_argument("--no-embed", action="store_true")
-    ap.add_argument("--check-md", help="markdown file to compare with the JSON (default: <out-dir>/../heuristic-evaluation.md if it exists)")
+    ap.add_argument("--check-md", help="markdown file to compare with the JSON (default: <out-dir>/index.md if it exists)")
     ap.add_argument("--no-check", action="store_true", help="skip the markdown comparison")
     a = ap.parse_args()
     d = json.load(open(a.data, encoding="utf-8"))
     _, errs = check(d)
     if errs:
         print("Fix these first:\n- " + "\n- ".join(errs)); sys.exit(1)
-    md = a.check_md or os.path.join(a.out_dir, "..", "heuristic-evaluation.md")
+    md = a.check_md or os.path.join(a.out_dir, "index.md")
     drift = [] if a.no_check or not os.path.exists(md) else check_md(d, md)
     os.makedirs(a.out_dir, exist_ok=True)
     assets = a.assets_dir or os.path.join(a.out_dir, "..", "assets")
@@ -113,30 +113,6 @@ def main():
     kb = os.path.getsize(out) // 1024
     print(f"wrote {out} ({kb} KB, {len(d['findings'])} findings, {len(imgs)} embedded images)")
     if kb > SIZE_WARN_KB: print(f"warning: above {SIZE_WARN_KB} KB, the Claude preview pane may refuse to open it (a normal browser is fine)")
-    idx = os.path.join(a.out_dir, "index.md")
-    if not os.path.exists(idx):
-        n = len(d["findings"])
-        open(idx, "w", encoding="utf-8").write(f'''---
-type: "heuristic-evaluation"
-title: "Heuristic evaluation whiteboard"
-stage: "Discover"
-status: "draft"
-summary: "A whiteboard of the screens grouped by journey. Each usability problem is one sticky note with a pin on the exact spot of the screen. Pan and zoom to explore. Draft: findings are not yet checked by the owner."
-supports: []
-embed: true
-media:
-  - "heuristic-whiteboard.html"
----
-
-# Heuristic evaluation whiteboard
-
-The same {n} findings as in `work/heuristic-evaluation.md`, drawn on a board. Each sticky note holds one finding: where on the screen, what the user sees, the heuristic and the severity. The numbered pin marks the spot. Note colour shows severity.
-
-**How to use it:** scroll or drag to move, Ctrl or ⌘ plus scroll (or pinch) to zoom, click a note or pin to follow it, use the Journey list to filter, press 0 to fit all.
-
-For sharp screenshots open the file in a normal browser. The screenshots are read from `work/assets/`, so keep that folder next to this one.
-''')
-        print(f"wrote {idx}")
     if drift:
         print(f"\nThe markdown ({os.path.normpath(md)}) and the JSON disagree. Update both so they match, then rebuild:\n- " + "\n- ".join(drift))
         sys.exit(2)

@@ -5,6 +5,9 @@ stage: "Discover"
 status: "draft"
 summary: "Screen-by-screen check of <product> (<N> screens, <N> journeys) against Nielsen's 10 heuristics, with a 0 to 4 severity for each problem. The findings are an AI draft from the screenshots only and still need the owner's check."
 supports: []
+embed: true
+media:
+  - "heuristic-whiteboard.html"
 ---
 
 # Heuristic evaluation of the current experience
@@ -14,6 +17,8 @@ supports: []
 ## 1. What this is
 
 A first pass at "Validate the current experience". Every screen of the journeys is checked against the 10 heuristics in `standards/principle-checks.md` and every problem is rated with `standards/severity-levels.md`. Screen references (J1 · 01 and so on) are the same as in `work/current-user-flow/`, and the images are in `work/assets/`.
+
+**The whiteboard** (`heuristic-whiteboard.html`, in this folder) draws the same findings on the screens, one sticky note and one pin per finding. Open it in a normal browser for sharp screenshots. The findings are also kept in `findings.json`; when a finding changes here, change it there too and rebuild the whiteboard.
 
 **How it was made:** all <N> screenshots were looked at one by one and compared with the owner's possible breakdowns in the flow diagrams.
 
