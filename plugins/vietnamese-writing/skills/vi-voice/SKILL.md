@@ -1,6 +1,6 @@
 ---
 name: vi-voice
-description: Viết hoặc viết lại nội dung tiếng Việt theo văn phong của Winnie (tự nhiên, chuyên nghiệp, không chữ đệm khi nói, tiêu đề tiếng Anh, thuật ngữ giữ tiếng Anh). Dùng khi Winnie nói "viết lại theo giọng của mình", "chỉnh văn phong tiếng Việt", "dịch sang tiếng Việt", hoặc khi tạo/chỉnh lesson, slide outline, teleprompter, method card, recap, tài liệu cho mentee bằng tiếng Việt.
+description: "Viết hoặc viết lại tiếng Việt theo giọng Winnie cho lesson, slide, teleprompter, tài liệu mentee. Dùng khi nói 'viết theo giọng của mình', 'chỉnh văn phong', 'dịch sang tiếng Việt'."
 ---
 
 # vi-voice
@@ -11,11 +11,17 @@ Viết hoặc viết lại nội dung tiếng Việt theo đúng văn phong củ
 
 Đọc toàn bộ file này trước khi viết bất cứ câu nào:
 
-`/Users/winnie.nguyen/library/CloudStorage/GoogleDrive-nguyenphuctuongvan@gmail.com/My Drive/03_Mentoring/_system/rules/vi-voice.md`
+`<03_Mentoring>/_system/rules/vi-voice.md`
+
+`<03_Mentoring>` là thư mục Mentoring trên Google Drive của máy này, tìm bằng:
+
+```bash
+ls -d ~/Library/CloudStorage/GoogleDrive-*/"My Drive"/03_Mentoring
+```
 
 Nếu làm việc trong thư mục 03_Mentoring, đọc thêm `CLAUDE.md` ở gốc (quy tắc sync lesson và slide outline, không tên tool AI cụ thể, không tên mentee). Nếu cần cấu trúc riêng của khoá AI Prototype Development, đọc `programs/online-course/AI Prototype Development/writing-style-guide.md`. `vi-voice.md` thắng khi có mâu thuẫn về giọng văn và từ vựng.
 
-Ví dụ áp dụng thực tế: `library/lessons/ai-design-workflow/learning/voice-sample-vi.md`.
+Ví dụ áp dụng thực tế: `programs/ai-design-workflow/learning/voice-sample-vi.md`.
 
 ## Quy trình
 

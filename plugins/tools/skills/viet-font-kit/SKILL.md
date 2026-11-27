@@ -1,6 +1,6 @@
 ---
 name: "viet-font-kit"
-description: "Việt hoá font chữ (.otf/.ttf thiếu ậ ặ ơ ư…): dựng đủ chữ Việt từ chính bộ phận của font, duyệt từng VER trên trang artifact có khung kéo và bàn vẽ, chỉ xuất file khi người dùng chốt VER."
+description: "Việt hoá font .otf/.ttf thiếu dấu tiếng Việt, duyệt từng VER trên artifact rồi mới xuất file. Dùng khi nói 'Việt hoá font', 'thêm tiếng Việt cho font', 'font lỗi dấu'."
 ---
 
 # Việt Font Kit — Việt hoá font chữ

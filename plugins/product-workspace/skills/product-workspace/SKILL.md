@@ -1,6 +1,6 @@
 ---
 name: product-workspace
-description: "Work inside an AI Product Workspace project folder (a folder with AGENTS.md, context/, work/, insights/, stages/, standards/): add insights from interview or survey notes, create linked items (opportunity, hypothesis, metric, decision, evidence, finding) with the right relationships, add images or documents to the report, draw user flows from Mermaid, rebuild or preview the traceability report (index.html), bundle it to send. Also creates a new project (a new project folder) from the workspace template. Use when the user asks to create or start a new project ('Tạo một dự án mới', 'Create a new project called ...'), or mentions a case/hub/report for a product project, insights, opportunities, hypotheses, decisions, evidence, findings, step cards, 'rút insight', 'ghi một quyết định', 'tạo lại báo cáo', or opens a folder that has AGENTS.md next to insights/."
+description: "AI Product Workspace projects (AGENTS.md + insights/): new project, insights, opportunities, decisions, evidence, report. Use for 'tạo dự án mới', 'rút insight', 'ghi quyết định', 'tạo lại báo cáo'."
 license: MIT
 ---
 

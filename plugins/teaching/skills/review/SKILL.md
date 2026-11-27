@@ -1,6 +1,6 @@
 ---
 name: "review-mentoring"
-description: "Instructional-design and teach-ability review for lessons and slide outlines before teaching. Trigger with \"/review\", \"review this lesson\", \"does this deck make sense\", \"check this before I teach it\", \"audit the speaker notes\", \"notes audit\", or when a lesson.md / slide-outline.md is shared for feedback."
+description: "Teach-ability and instructional-design review of a lesson.md or slide-outline.md before teaching. Use for '/review', 'review this lesson', 'does this deck make sense', 'audit the speaker notes'."
 ---
 
 # Review

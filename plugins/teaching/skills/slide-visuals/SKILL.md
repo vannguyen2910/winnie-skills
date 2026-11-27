@@ -1,6 +1,6 @@
 ---
 name: slide-visuals
-description: Produce the visuals for a slide outline - schematic diagrams through the diagram-design skill, real screenshots from a Figma file the user owns, or outside images only with permission - save them in the lesson's assets/, link each one from its slide in the outline, and log every image's source and licence in assets/SOURCES.md. Use when Winnie says "slide-visuals", "làm hình cho slide", "vẽ sơ đồ cho outline", or an outline has DIAGRAM, COMPARE or IMAGE slides without a visual.
+description: "Make diagrams and screenshots for a slide outline and log their sources. Use for 'slide-visuals', 'làm hình cho slide', 'vẽ sơ đồ cho outline'."
 ---
 
 # slide-visuals
@@ -15,7 +15,7 @@ List the slides whose layout is `DIAGRAM`, `COMPARE`, `IMAGE`, or whose Visual h
 - `REAL`: a real screen, a real photo or a real artifact. Use a screenshot of the user's own file, or ask.
 - Text-only slides (`STATEMENT`, `NUMBERED`, `PROCESS`, `MILESTONE`) need no image. Skip them.
 
-Never mix the two registers on one slide (`_system/rules/slide-deck-rules.md`, Visual language).
+Never mix the two registers on one slide (`_system/rules/slide-deck-rules.md`, Layout catalogue: 13 · Diagram, 15 · Image).
 
 ## 2. Schematic slides: use diagram-design
 

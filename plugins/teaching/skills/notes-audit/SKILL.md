@@ -1,18 +1,22 @@
 ---
 name: notes-audit
-description: Audit the speaker notes of a slide outline (*-slide-outline.md) and report which slides need a real example, are too thin or too long for their time, or break the notes format. Report only, never edits. Use when Winnie says "notes-audit", "audit speaker notes", "kiểm tra speaker notes", or wants to check an outline before teaching.
+description: "Report-only script audit of speaker notes in a *-slide-outline.md: missing examples, length, format. Use for 'notes-audit', 'audit speaker notes', 'kiểm tra speaker notes'."
 ---
 
 # notes-audit
 
 Audit the speaker notes of a slide outline. Input: path to a `*-slide-outline.md`, or a lesson folder. Read and report only; do not edit the outline, the lesson or the deck.
 
-Rules to read before judging (Drive): `/Users/winnie.nguyen/library/CloudStorage/GoogleDrive-nguyenphuctuongvan@gmail.com/My Drive/03_Mentoring/_system/rules/slide-deck-rules.md` (Speaker notes rule, Title and kicker copy) and `.../_system/rules/vi-voice.md` for any Vietnamese.
+Rules to read before judging (Drive): `<03_Mentoring>/_system/rules/slide-deck-rules.md` (Speaker notes rule, Title and kicker copy) and `<03_Mentoring>/_system/rules/vi-voice.md` for any Vietnamese. `<03_Mentoring>` is the Mentoring folder on this machine's Google Drive; find it with:
+
+```bash
+ls -d ~/Library/CloudStorage/GoogleDrive-*/"My Drive"/03_Mentoring
+```
 
 ## 1. Run the mechanical check
 
 ```
-python3 ~/.claude/skills/notes-audit/notes-audit.py <outline.md>
+python3 "<this skill>/notes-audit.py" <outline.md>
 ```
 
 Per slide it reports verbatim (`>`) lines, bullets, spoken words, estimated spoken minutes, missing `Ví dụ` fields, bracketed stage directions, and slides with no verbatim line. It also flags Title and Kicker copy that breaks the Title and kicker rule (Title over 6 words, Kicker with a Phần/Buổi number, Kicker repeating Title).

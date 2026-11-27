@@ -1,6 +1,6 @@
 ---
 name: screens-from-recording
-description: "Turn a screen recording of an app (phone or web) into clean, named screenshots inside an AI Product Workspace project: extract one frame per screen with ffmpeg, drop duplicates and transitions, group the frames by journey, blur personal details with the owner's approval, save them to work/assets/<journey>/NN-name.jpg and log the AI use. Use when the user has a recording, video or screen capture of a walk-through and needs screenshots from it, says 'extract screenshots from my recording', 'lấy ảnh màn hình từ video', 'tách frame', 'quay màn hình', or before a heuristic evaluation, user flow, task analysis or journey map when the screens only exist as a video, even if they do not say 'skill'."
+description: "Extract clean, blurred, named screenshots from an app screen recording into a product workspace. Use for 'extract screenshots from my recording', 'lấy ảnh màn hình từ video', 'tách frame'."
 license: MIT
 ---
 

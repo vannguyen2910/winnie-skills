@@ -1,6 +1,6 @@
 ---
 name: course-restructure
-description: Restructure or reorganize a course, curriculum, training program, or any multi-file content set — especially one with paired/synced files (a lesson doc + matching slide outline, a chapter + its exercises) that must move together. Covers the workflow end to end — brainstorming the new structure before touching files, turning it into a file-level migration checklist, executing moves/merges/splits while preserving voice and following any project sync rules, grounding new content in research versus flagging content that's the user's own teaching methodology, sweeping for stale cross-references, and updating the master outline. Use whenever the user wants to rethink, reorganize, merge, split, renumber, or move sections of a course, curriculum, or documentation set — even for phrases like "I want to restructure this," "this section doesn't flow right," or "can we move this lesson somewhere else," not only explicit requests for a restructuring skill.
+description: "Reorganize a course or multi-file content set: merge, split, move, renumber lessons and keep paired files in sync. Use for 'restructure this', 'tái cấu trúc khoá học', 'chuyển bài này'."
 ---
 
 # Course / Curriculum Restructure
