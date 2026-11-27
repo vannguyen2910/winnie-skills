@@ -1,6 +1,6 @@
 ---
 name: grammar-checker-vi
-description: Kiểm tra chính tả, dấu câu, khoảng trắng, cấu trúc câu, tham chiếu đại từ và kết hợp từ trong văn bản tiếng Việt. Dùng khi người dùng yêu cầu soát lỗi hoặc proofread; không dùng để áp một phong cách, đổi nội dung, sửa code/URL/identifier, hay coi lựa chọn register và phương ngữ là lỗi ngữ pháp.
+description: "Soát lỗi chính tả, dấu câu, ngữ pháp tiếng Việt. Dùng khi yêu cầu soát lỗi, proofread; không đổi văn phong hay nội dung."
 license: MIT
 metadata:
   language: vi

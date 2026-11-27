@@ -1,6 +1,6 @@
 ---
 name: landing-page
-description: Build or edit Winnie's course landing page (UX Level Up, site/public/landing-vN, static HTML/CSS/JS, Vietnamese). Use when she asks to make, redesign, tweak or review a landing page section, carousel, flip card, popup form or hero, or says "landing", "landing page", "trang đăng ký". Holds her design rules, the interaction patterns that already broke once, and a pre-ship checklist.
+description: "Build or edit Winnie's UX Level Up course landing page (static HTML, Vietnamese). Use for 'landing page', 'trang đăng ký', or its hero, carousel, flip card or popup form."
 ---
 
 # Landing page (UX Level Up)

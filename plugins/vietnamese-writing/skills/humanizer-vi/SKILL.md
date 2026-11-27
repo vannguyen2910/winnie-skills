@@ -1,6 +1,6 @@
 ---
 name: humanizer-vi
-description: Biên tập tiếng Việt sáo, máy móc, đều nhịp hoặc lệch giọng để tự nhiên, rõ và hợp độc giả. Dùng khi chỉnh văn phong, bảo toàn giọng tác giả, hoặc biên tập chat và kịch bản nói theo yêu cầu. Không dùng để suy đoán tác giả, lách detector hay chỉ soát lỗi ngữ pháp.
+description: "Biên tập tiếng Việt sáo, máy móc, 'nghe như AI' cho tự nhiên, giữ giọng tác giả. Không dùng để lách detector hay chỉ soát lỗi."
 license: MIT
 metadata:
   language: vi

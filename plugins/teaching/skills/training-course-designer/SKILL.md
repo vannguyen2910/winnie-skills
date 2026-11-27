@@ -1,6 +1,6 @@
 ---
 name: training-course-designer
-description: Professional training course design for corporate L&D with ONE-CLICK generation of complete training packages including course materials, marketing copy, and assessments. Use when designing training courses, workshops, or learning programs.
+description: "Design a corporate L&D course as a full package: outline, instructor guide, handbook, marketing copy, assessments. Use for training programs or workshops, 'thiết kế khoá đào tạo doanh nghiệp'."
 ---
 
 # Training Course Designer - Enhanced Edition
@@ -37,7 +37,7 @@ Follow this structured workflow to design a high-impact training course and gene
 
 All great training starts with a clear understanding of the need. Instead of ad-hoc questions, complete the standardized **Course Design Brief**. This structured document ensures all critical information is captured upfront, eliminating guesswork and repeated follow-ups.
 
-**Action**: Read and complete the template at `/home/ubuntu/skills/training-course-designer/references/course-design-brief-template.md`.
+**Action**: Read and complete the template at `references/course-design-brief-template.md`.
 
 ### Step 2: Select the Right Course Framework
 
@@ -58,7 +58,7 @@ With the framework selected, break the course into 3-5 logical modules. For each
 3.  **Practice & Application (40-60% time)**: Use activities from the Interactive Activities Library to facilitate hands-on practice, case studies, or discussions.
 4.  **Summary & Action Planning (5-10 min)**: Recap key takeaways and guide participants to create personal action plans.
 
-**Action**: Read `/home/ubuntu/skills/training-course-designer/references/interactive-activities-library.md` to select appropriate activities for each module.
+**Action**: Read `references/interactive-activities-library.md` to select appropriate activities for each module.
 
 ### Step 4: Create a Detailed Time Schedule
 
@@ -73,7 +73,7 @@ Map out the entire course in a minute-by-minute schedule. This ensures a smooth 
 
 Instead of just an outline, generate a complete, ready-to-use kit of professional documents. This ensures consistency and saves significant time in preparation.
 
-**Action**: Use the templates in the `/home/ubuntu/skills/training-course-designer/templates/` directory to create the full set of deliverables.
+**Action**: Use the templates in the `templates/` directory to create the full set of deliverables.
 
 ## The Deliverables Kit (Standard Output)
 
@@ -87,9 +87,10 @@ This skill produces a comprehensive package of five key documents, ensuring a st
 
 ## Reference Documents & Templates
 
-- **Course Design Brief Template**: `/home/ubuntu/skills/training-course-designer/references/course-design-brief-template.md`
-- **Interactive Activities Library**: `/home/ubuntu/skills/training-course-designer/references/interactive-activities-library.md`
-- **Deliverables Kit Templates**: Located in `/home/ubuntu/skills/training-course-designer/templates/` (e.g., `instructor-guide-template.md`, `participant-handbook-template.md`)
+- **Course Design Brief Template**: `references/course-design-brief-template.md`
+- **Interactive Activities Library**: `references/interactive-activities-library.md`
+- **Course Design Methodology** (written in Chinese): `references/course-design-methodology.md`
+- **Deliverables Kit Templates**: Located in `templates/` (e.g., `instructor-guide-template.md`, `participant-handbook-template.md`)
 
 
 ---

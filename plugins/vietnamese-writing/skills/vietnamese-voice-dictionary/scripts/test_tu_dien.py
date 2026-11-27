@@ -1,4 +1,4 @@
-"""Kiem thu tu_dien.py tren du lieu tam. Chay: python test_tu_dien.py"""
+"""Kiem thu tu_dien.py tren du lieu tam. Chay: python3 test_tu_dien.py"""
 import json
 import os
 import subprocess
@@ -70,6 +70,19 @@ class TestTuDien(unittest.TestCase):
     def test_cum_dai_thang_cum_ngan(self):
         db = {"muc": [{"sai": "plug", "dung": "X", "chac": True}, {"sai": "plug gain", "dung": "plugin", "chac": True}]}
         self.assertEqual(tu_dien.sua("cài plug gain", db)["van_ban_da_sua"], "cài plugin")
+
+    def test_hoc_ghi_ngoai_skill(self):
+        home = Path(tempfile.mkdtemp())
+        env = {k: v for k, v in os.environ.items() if k != "HIEU_GIONG_NOI_DATA"}
+        env.update(HOME=str(home), USERPROFILE=str(home))
+        before = SEED.read_bytes()
+        subprocess.run([sys.executable, str(HERE / "tu_dien.py"), "hoc", "ô tu", "auto"],
+                       env=env, check=True, capture_output=True)
+        self.assertEqual(SEED.read_bytes(), before)
+        db = tu_dien.load(home / ".claude/data/vietnamese-voice-dictionary/dictionary.json")
+        words = [m["sai"] for m in db["muc"]]
+        self.assertIn("ô tu", words)
+        self.assertIn("sở kêu", words)  # tu khoi dau duoc giu lai
 
     def test_hook(self):
         hook = HERE / "hook_userprompt.py"

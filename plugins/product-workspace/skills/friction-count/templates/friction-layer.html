@@ -1,0 +1,82 @@
+<style>
+  .mk { position:absolute; z-index:2; pointer-events:none; color:#fff; font-size:11px; font-weight:700; white-space:nowrap; }
+  .mk.tap { width:30px; height:30px; margin:-15px 0 0 -15px; border-radius:50%; background:#1257c9; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; }
+  .mk.swipe { border:3px dashed #6b2fb3; border-radius:14px; }
+  .mk.input { border:3px solid #00695c; }
+  .mk b { position:absolute; left:0; top:0; padding:2px 6px; border-radius:0 0 6px 0; }
+  .mk.swipe b { background:#6b2fb3; border-radius:10px 0 6px 0; }
+  .mk.input b { background:#00695c; }
+  .mk.input.above b { top:auto; bottom:100%; left:-3px; border-radius:6px 6px 0 0; }
+  .mk em { position:absolute; right:0; bottom:0; padding:1px 5px; font-style:normal; font-size:10px; background:inherit; border-radius:4px 0 0 0; }
+  .mk.swipe em { background:#6b2fb3; }
+  .mk.input em { background:#00695c; }
+  .mk.tap em { right:auto; left:50%; bottom:auto; top:100%; transform:translateX(-50%); border-radius:4px; }
+  .mk.tap.low em { top:auto; bottom:100%; }
+  .mk.tap.lft em { left:0; transform:none; }
+  .mk.tap.rgt em { left:auto; right:0; transform:none; }
+  .key { position:static; display:inline-block; margin:0 5px 0 0; }
+  .key.mk.tap { width:22px; height:22px; margin:0 5px 0 0; display:inline-flex; }
+  .key.mk.swipe, .key.mk.input { padding:1px 6px; color:var(--ink); }
+  .fx { margin-top:12px; padding:10px 12px; background:#fff; border:1px solid #c9c9c3; border-radius:8px; font-size:17px; line-height:1.45; font-variant-numeric:tabular-nums; }
+  .fx small { display:block; font-size:13px; font-weight:700; color:var(--muted); }
+  .fx .off-shot { display:block; font-size:13px; margin-top:4px; }
+  .tot { margin-left:28px; font-weight:400; font-variant-numeric:tabular-nums; white-space:pre; }
+  .v-heur .mk, .v-heur .fx, .v-heur .tot, .v-heur .fric-only { display:none !important; }
+  .v-fric .note, .v-fric .pin, .v-fric #lines, .v-fric #legend { display:none; }
+</style>
+<script>
+// Friction layer, added by the friction-count skill. Do not edit here: change friction.json and run friction.py.
+(() => {
+  const D = __FRICTION__;
+  const panel = document.querySelector("#ui .panel");
+
+  const pick = el("label", "flt", "View");
+  const vsel = document.createElement("select");
+  vsel.id = "vsel"; vsel.setAttribute("aria-label", "Choose what the board shows");
+  [["heur", "Heuristics"], ["fric", "Friction"], ["both", "Both"]].forEach(([v, t]) => { const o = el("option", null, t); o.value = v; vsel.appendChild(o); });
+  pick.appendChild(vsel); panel.querySelector(".row").appendChild(pick);
+
+  const keys = el("div", "row fric-only"); keys.style.marginTop = "8px";
+  [["tap", "T", "Tap"], ["swipe", "S", "Swipe or scroll"], ["input", "In", "Input"]].forEach(([c, k, t]) => {
+    const item = el("span", "sw"); item.appendChild(el("span", "key mk " + c, k)); item.appendChild(document.createTextNode(t)); keys.appendChild(item); });
+  keys.appendChild(el("span", "sw", "+ EXTRA = could be done without"));
+  panel.appendChild(keys);
+  panel.appendChild(el("div", "hint fric-only", (D.source === "recording"
+    ? "Friction counts are inferred from screen changes in a recording."
+    : "Friction counts are estimates from screenshots, not a recording: treat them as minimums.") + " Extra steps are already included in taps, swipes and inputs."));
+
+  function marker(m) {
+    const d = el("div", "mk " + m.a);
+    d.style.left = (m.x * 100) + "%"; d.style.top = (m.y * 100) + "%";
+    if (m.a === "tap") {
+      d.textContent = m.label;
+      if (m.y > .93) d.classList.add("low");
+      if (m.x < .12) d.classList.add("lft"); else if (m.x > .88) d.classList.add("rgt");
+    } else {
+      d.style.width = (m.w * 100) + "%"; d.style.height = (m.h * 100) + "%";
+      d.appendChild(el("b", null, m.label));
+      if (m.a === "input" && m.y > .04) d.classList.add("above");   // keep the field itself readable
+    }
+    if (m.extra) d.appendChild(el("em", null, "+ EXTRA"));
+    return d;
+  }
+
+  JOURNEYS.forEach((j, ji) => {
+    board.querySelector('.band[data-j="' + ji + '"]').appendChild(el("span", "tot", D.bands[j.code]));
+    board.querySelectorAll('.screen[data-j="' + ji + '"]').forEach((wrap, i) => {
+      const s = D.screens[j.code + "-" + String(i + 1).padStart(2, "0")], fx = el("div", "fx");
+      if (s) {
+        s.marks.forEach(m => wrap.querySelector(".frame").appendChild(marker(m)));
+        if (s.explore) fx.appendChild(el("small", null, "Exploration, not part of the task"));
+        s.lines.forEach(t => fx.appendChild(el("div", null, t)));
+        s.offs.forEach(t => fx.appendChild(el("span", "off-shot", t)));
+        fx.appendChild(el("small", null, s.status));
+      } else fx.appendChild(el("div", null, "Not counted"));
+      wrap.appendChild(fx);
+    });
+  });
+
+  vsel.onchange = () => { document.body.className = "v-" + vsel.value; if (current != null) select(current); vsel.blur(); };
+  vsel.value = "heur"; document.body.className = "v-heur";
+})();
+</script>

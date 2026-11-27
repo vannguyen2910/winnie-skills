@@ -2,7 +2,7 @@
 """Merge SRT or VTT caption cues into timestamped paragraphs.
 
 Usage:
-    python clean_subs.py input.srt [--gap 2.0] [--max-chars 600]
+    python3 clean_subs.py input.srt [--gap 2.0] [--max-chars 600]
 
 Prints paragraphs like "[00:01:05] text ..." to stdout. Standard library only.
 """

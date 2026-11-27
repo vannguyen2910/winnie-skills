@@ -39,3 +39,12 @@ Input of `scripts/build_whiteboard.py`. Save it as `work/heuristic-evaluation/fi
 The script checks that screens exist, pins are inside the image, severity is 0 to 4, principles are valid and numbers are not repeated, then prints what to fix.
 
 A finding whose pins are on another journey's screen keeps its note in its own `at` journey. With the Journey filter on, that pin is hidden because its note is hidden.
+
+## The board
+
+One HTML file. Journeys are bands of screens in order. Each finding is a sticky note beside its screen with a numbered pin on the spot and a line from pin to note; note colour is severity. Scroll or drag to move, Ctrl/⌘ + scroll or pinch to zoom, click a note or pin to follow it, the Journey dropdown filters, `0` fits all.
+
+Tell the owner when these matter:
+
+- The Claude preview pane loads only small files (about 0.7 MB), so the script embeds 200 px fallback screenshots and the board looks blurry there. For sharp images, open it in a browser (`open work/heuristic-evaluation/heuristic-whiteboard.html`) with `work/assets/` still next to the board's folder.
+- Embedding uses macOS `sips`. Without it the script warns and the board needs the assets folder.

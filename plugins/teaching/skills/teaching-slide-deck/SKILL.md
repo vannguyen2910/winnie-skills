@@ -1,6 +1,6 @@
 ---
 name: "teaching-slide-deck"
-description: "Dùng khi Winnie yêu cầu làm hoặc sửa slide, deck, speaker notes, mockup thiết bị hoặc coaching plan cho các buổi dạy (Day 1-7, Day 8, một lesson trong library) theo Design System của cô ấy."
+description: "Làm hoặc sửa slide, deck, speaker notes, mockup thiết bị, coaching plan cho buổi dạy của Winnie (Day 1-8, lesson trong library) theo Design System."
 ---
 
 # slide-deck

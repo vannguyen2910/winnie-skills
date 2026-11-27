@@ -1,5 +1,5 @@
 {
   "name": "product-workspace",
-  "version": "1.3.0",
-  "description": "Winnie skills: AI Product Workspace helper, competitor research, research methods, screens from recordings and heuristic evaluation"
+  "version": "1.4.0",
+  "description": "Winnie skills: AI Product Workspace helper, competitor research, research methods, screens from recordings, heuristic evaluation and friction counts"
 }

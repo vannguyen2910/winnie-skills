@@ -1,17 +1,6 @@
 ---
 name: mentoring-training
-description: >
-  Comprehensive mentoring and training skill for individuals and corporate/professional teams,
-  with AI skills and mindset embedded throughout the entire training lifecycle. Use this skill
-  whenever the user wants to: coach someone 1-on-1, create a personalized development plan,
-  build training materials or curricula, design assessments or quizzes, write feedback or
-  performance reviews, plan workshops or group learning sessions, onboard new employees, or
-  support any kind of professional or personal growth journey. Always weave in AI tool usage
-  (ChatGPT, Claude, Copilot), prompt engineering, critical thinking about AI outputs, and AI
-  ethics into every coaching milestone, training module, assignment, and reflection. Trigger
-  this skill even for partial requests like "help me give feedback to my team", "I need a quiz
-  on X", or "how do I structure a training session" — don't wait for the user to say "mentoring"
-  or "training" explicitly.
+description: "1-on-1 coaching, development plans, quizzes, feedback, performance reviews, workshops, onboarding, with AI skills built in. Use for 'mentor', 'coaching', 'quiz', 'góp ý nhân viên'."
 ---
 
 # Mentoring & Training Skill

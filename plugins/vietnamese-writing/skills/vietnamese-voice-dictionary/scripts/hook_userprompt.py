@@ -24,7 +24,7 @@ def main():
         if r["goi_y"]:
             parts.append("Co the nghe nham, xet theo ngu canh: "
                          + "; ".join("\"%s\" co the la \"%s\"" % (a, b) for a, b in r["goi_y"]) + ".")
-        parts.append("Doc theo nghia da sua. Neu Founder chinh lai mot tu, chay: python \"%s\" hoc \"<sai>\" \"<dung>\"."
+        parts.append("Doc theo nghia da sua. Neu Founder chinh lai mot tu, chay: python3 \"%s\" hoc \"<sai>\" \"<dung>\"."
                      % (Path(tu_dien.__file__)))
         print(json.dumps({"hookSpecificOutput": {"hookEventName": "UserPromptSubmit",
                                                  "additionalContext": " ".join(parts)}}, ensure_ascii=False))

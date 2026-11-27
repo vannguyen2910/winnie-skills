@@ -1,6 +1,6 @@
 ---
 name: translationese-cleaner-vi
-description: Làm sạch văn phong tiếng Việt dịch sát từ tiếng Anh, gồm trật tự câu, danh hóa, bị động, business cliché và cụm đúng ngữ pháp nhưng không tự nhiên. Dùng khi bản dịch hoặc bản nháp mang cấu trúc Anh-Việt; không dùng để thay đổi thuật ngữ chuẩn, đơn giản hóa văn bản pháp lý, hay tự dịch nội dung chưa có bản tiếng Việt.
+description: "Sửa tiếng Việt dịch sát tiếng Anh, 'nghe như dịch': trật tự câu, danh hoá, bị động. Không dùng để dịch mới hay đơn giản hoá văn bản pháp lý."
 license: MIT
 metadata:
   language: vi

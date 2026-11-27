@@ -1,13 +1,14 @@
 """Tu dien sua loi giong noi (voice-to-text) cua Founder. Nho tu nghe nham, lan sau tu sua.
 
-    python tu_dien.py sua "mo ghiep H roi kiem tra so ke"   # ap tu dien, in ban da sua + danh sach thay
-    python tu_dien.py sua "..." --json                       # in JSON de may doc
-    python tu_dien.py hoc "so ke" "skill"                    # nho: nghe la "so ke" thi hieu la "skill"
-    python tu_dien.py hoc "sq" "skill" --nhap-nhang          # tu ngan / tu that de nham: chi goi y, khong tu sua
-    python tu_dien.py xem                                    # liet ke
-    python tu_dien.py xoa "so ke"                            # bo mot muc
+    python3 tu_dien.py sua "mo ghiep H roi kiem tra so ke"   # ap tu dien, in ban da sua + danh sach thay
+    python3 tu_dien.py sua "..." --json                       # in JSON de may doc
+    python3 tu_dien.py hoc "so ke" "skill"                    # nho: nghe la "so ke" thi hieu la "skill"
+    python3 tu_dien.py hoc "sq" "skill" --nhap-nhang          # tu ngan / tu that de nham: chi goi y, khong tu sua
+    python3 tu_dien.py xem                                    # liet ke
+    python3 tu_dien.py xoa "so ke"                            # bo mot muc
 
-Du lieu: data/dictionary.json canh thu muc scripts (doi bang bien moi truong HIEU_GIONG_NOI_DATA).
+Du lieu: ~/.claude/data/vietnamese-voice-dictionary/dictionary.json (doi bang bien moi truong HIEU_GIONG_NOI_DATA).
+Chua co file do thi doc tu khoi dau o data/dictionary.json; thu muc skill khong bao gio bi ghi.
 Chi luu tu vung, KHONG luu noi dung cuoc tro chuyen.
 """
 import argparse
@@ -21,7 +22,9 @@ import unicodedata
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-DATA = Path(os.environ.get("HIEU_GIONG_NOI_DATA") or (HERE.parent / "data" / "dictionary.json"))
+SEED = HERE.parent / "data" / "dictionary.json"
+CUSTOM = os.environ.get("HIEU_GIONG_NOI_DATA")
+DATA = Path(CUSTOM or Path.home() / ".claude" / "data" / "vietnamese-voice-dictionary" / "dictionary.json")
 MAX_LEN = 60
 SHORT = 3  # tu <= 3 ky tu de trung tu that: mac dinh chi goi y
 
@@ -32,6 +35,8 @@ def norm(s):
 
 def load(path=None):
     p = Path(path or DATA)
+    if not p.exists() and not path and not CUSTOM:
+        p = SEED
     if not p.exists():
         return {"phien_ban": 1, "muc": []}
     return json.loads(p.read_text(encoding="utf-8-sig"))

@@ -1,6 +1,6 @@
 ---
 name: style-guide-vi
-description: Kiểm tra và áp dụng nhất quán style guide tiếng Việt cho xưng hô, thuật ngữ, viết hoa, số, ngày giờ, đơn vị, heading, bullet và code. Dùng khi chuẩn hóa một hoặc nhiều tài liệu; không dùng để thay thế grammar review, áp quy tắc mặc định lên style guide riêng, hay đổi tên sản phẩm và nội dung được trích nguyên văn.
+description: "Áp style guide tiếng Việt nhất quán: xưng hô, thuật ngữ, viết hoa, số, ngày giờ, heading. Dùng khi chuẩn hoá tài liệu; không thay cho soát ngữ pháp."
 license: MIT
 metadata:
   language: vi

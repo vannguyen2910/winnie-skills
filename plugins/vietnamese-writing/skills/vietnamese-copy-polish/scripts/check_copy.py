@@ -2,7 +2,7 @@
 """Lint Vietnamese copy: dashes, long sentences, missing diacritics, CTA, length.
 
 Usage:
-    python check_copy.py FILE [--platform facebook]
+    python3 check_copy.py FILE [--platform facebook]
 
 Exit code 1 when a hard error (dash characters) is found. Standard library only.
 """

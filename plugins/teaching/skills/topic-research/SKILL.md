@@ -1,6 +1,6 @@
 ---
 name: topic-research
-description: Research a teaching topic from the web and turn it into a private learning/research.md for a lesson - sourced claims with a verification status, a concept table, pitfalls, and learning values (LV1, LV2...) that a 90-minute lesson can teach. Use when Winnie says "topic-research", "cào data", "research cho lesson", "tìm learning values", or starts a new lesson and has no sourced material yet. Writes only the research file, never the lesson or outline.
+description: "Web research for a lesson topic into learning/research.md: sourced claims and learning values. Use for 'topic-research', 'cào data', 'research cho lesson', 'tìm learning values'."
 ---
 
 # topic-research
