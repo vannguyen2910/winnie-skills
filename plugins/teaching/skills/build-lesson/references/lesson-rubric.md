@@ -120,11 +120,13 @@ Nguồn: checklist teach-ability của `review-mentoring`. Dùng bốn mức nh�
 
 ### B2. Pacing so với thời lượng
 
-Đối chiếu nội dung từng slide với số phút của phase trong bảng cấu trúc buổi học. Ước lượng thời gian nói bằng công cụ đếm từ nếu có.
+Đối chiếu lượng nội dung slide (số slide, số ý, ví dụ phải giải thích) và thời lượng activity trên lớp với số phút của phase trong bảng cấu trúc buổi học. Bài tập làm ở nhà không tính vào buổi.
+
+Công cụ đếm từ chỉ cho mức tối thiểu khi speaker notes viết dạng bullet, vì người dạy nói dài hơn chữ ghi. Thời gian đếm được ngắn hơn số phút của phase không đủ để cho mức 1. Phase chỉ bị coi là quá thưa khi chỉ ra được slide hoặc activity còn thiếu. Thời gian đếm được dài hơn số phút thì phase quá tải.
 
 | Mức | Mô tả |
 |---|---|
-| 1 | Tổng thời lượng ước tính lệch quá 25% so với buổi, hoặc có phase cần gấp đôi thời gian được cấp. |
+| 1 | Tổng thời lượng ước tính theo cách trên lệch quá 25% so với buổi, hoặc có phase cần gấp đôi thời gian được cấp. |
 | 2 | Tổng khớp nhưng một vài phase quá tải hoặc quá thưa. |
 | 3 | Mỗi phase có lượng nội dung khớp số phút. |
 | 4 | Như mức 3, và lesson có sẵn phương án cắt hoặc kéo dài có thứ tự khi quá giờ. |
@@ -140,10 +142,12 @@ Nguồn: checklist teach-ability của `review-mentoring`. Dùng bốn mức nh�
 
 ### B4. Chuyển tiếp
 
+Đếm trước khi chấm: số chỗ chuyển (giữa hai slide, kể cả chuyển phase) có câu nối trong speaker notes, trên tổng số. Ghi tỷ lệ này vào evidence.
+
 | Mức | Mô tả |
 |---|---|
-| 1 | Nhiều chỗ chuyển slide không có câu nối trong speaker notes. |
-| 2 | Chuyển phase có câu nối, chuyển slide trong cùng phase thì không. |
+| 1 | Không có speaker notes, hoặc dưới một phần tư số chỗ chuyển có câu nối. |
+| 2 | Từ một phần tư số chỗ chuyển trở lên có câu nối, nhưng còn thiếu, ở chỗ chuyển phase hoặc trong cùng phase. |
 | 3 | Mọi chỗ chuyển đều có câu nối nói được thành lời. |
 | 4 | Như mức 3, và câu nối đồng thời là câu hỏi hoặc gợi mở giữ người học theo kịp. |
 
@@ -175,6 +179,8 @@ Agent chạy rồi chép nguyên kết quả vào báo cáo, ghi rõ lệnh đã
 | Cụm từ cần tránh theo hướng dẫn giọng văn của dự án | Đối chiếu bảng từ của dự án |
 
 Ghi chú: kết quả khớp trong phần tài liệu tham khảo hoặc trích nguồn học thuật có thể là ngoại lệ chấp nhận được. Agent đánh dấu để người dạy quyết, không tự bỏ qua.
+
+Miễn trừ: phần giới thiệu người dạy trên slide cover (tên, chức danh, nơi làm việc) không tính là vi phạm tên tổ chức. Ghi "miễn trừ" và không chép tên vào báo cáo.
 
 ---
 
