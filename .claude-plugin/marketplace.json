@@ -12,7 +12,7 @@
     {
       "name": "teaching",
       "source": "./plugins/teaching",
-      "description": "Course design, slide decks, notes audit, landing page, lesson review"
+      "description": "Course design, slide decks, notes audit, landing page, lesson building and review"
     },
     {
       "name": "product-workspace",
