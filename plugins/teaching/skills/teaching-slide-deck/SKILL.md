@@ -24,6 +24,7 @@ Chỉ đọc file cần cho việc đang làm.
 | Tạo deck, sửa deck đang có, click reveal, xem trước | [slides-format.md](references/slides-format.md) |
 | Viết hoặc sửa chữ, speaker notes, agenda tuần | [writing.md](references/writing.md) |
 | Cần slide mẫu đã duyệt | [lesson-decks.md](references/lesson-decks.md) |
+| Dựng deck một lesson, hoặc thêm, sửa quiz | [quick-check.md](references/quick-check.md) |
 
 ## Rule không được phá
 
@@ -51,6 +52,7 @@ Chỉ đọc file cần cho việc đang làm.
 | Lộ trình, mỗi tuần một slide | Title trái, agenda phải | `templates/week.html` |
 | Bộ công cụ trong khoá | Ba card có logo | `templates/tools.html` |
 | MILESTONE, practice | Milestone (nền `--sienna`) | Design System |
+| Quick check (quiz giữa và cuối buổi) | Slide mở tím, rồi slide câu hỏi | `templates/quick-check-opener.html`, `templates/quick-check-question.html` |
 | END | End | Design System |
 
 ## Quy trình
@@ -84,6 +86,7 @@ Script không thấy được những điểm sau, tự kiểm:
 - [ ] Section divider khớp `templates/divider.html`
 - [ ] Layout đúng khuôn, các card thẳng hàng, tương phản đạt
 - [ ] Thứ tự click khớp speaker notes
+- [ ] Deck lesson có quick check theo `references/quick-check.md`, hoặc đã nói rõ vì sao không có
 - [ ] Chữ tiếng Việt đã biên tập, lint không còn ERROR
 - [ ] Đã xem bố cục (hoặc ghi rõ chưa xem)
 - [ ] Outline và lesson đã khớp deck
