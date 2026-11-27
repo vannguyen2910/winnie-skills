@@ -72,6 +72,7 @@ One sentence: what the learner can do after this session that they could not bef
 ## Key decisions
 - Running example and why
 - Where AI appears and where it does not (manual before AI)
+- Quick check: 2 to 3 questions, each with the theory part it follows, the options and the answer (rules in the `teaching:teaching-slide-deck` skill, `references/quick-check.md`)
 - What is cut, and what is deferred to another lesson
 - Open questions for Winnie
 ```
@@ -106,9 +107,11 @@ Follow the sections of `_template-lesson.md` (mentoring-rules.md Rules LP-1 and 
 
 Apply the sync rule in CLAUDE.md: both files are written together and never left out of sync. Use the layout catalogue in `_system/rules/slide-deck-rules.md`. Never invent a layout type. Every slide has the standard fields (Kicker, Title, On-slide, Speaker notes as 3 to 6 bullets, Visual hint). The COVER slide follows the locked block in the template. Update the slide count in the `## Slide structure` line and the MILESTONE `Num:` values to match the lesson's phase timings.
 
+Add the quick check slides from the approved brief, as defined in `../teaching-slide-deck/references/quick-check.md` (read it first): each question gets a `MILESTONE · Quick check` opener with no `Num:` and a `NUMBERED · Quick check N` slide, one mid-session and one before Q&A. The questions live in the outline only, never in the lesson file.
+
 ### B4. Review before reporting
 
-Run the `teaching:review-mentoring` skill's checks on the pair, or apply its checklist inline: the session is theory first then practice (Theory block 40 minutes or less with no activity inside, Bridge and cheat sheet present, Practice at least 30 minutes and unbroken, every theory concept used by an activity; mentoring-rules.md Rule LP-3), objectives match activities, timings sum, handoffs from and to neighbouring lessons are consistent, outline matches lesson, QA-2 checklist (mentoring-rules.md). Then run the language pass from the Language section: `vietnamese-copy-polish` on on-slide text, and the vi-voice.md tables on the lesson body. Fix what is wrong, and list what you could not fix.
+Run the `teaching:review-mentoring` skill's checks on the pair, or apply its checklist inline: the session is theory first then practice (Theory block 40 minutes or less with no activity inside, Bridge and cheat sheet present, Practice at least 30 minutes and unbroken, every theory concept used by an activity; mentoring-rules.md Rule LP-3), objectives match activities, timings sum, handoffs from and to neighbouring lessons are consistent, outline matches lesson, QA-2 checklist (mentoring-rules.md). Check the quick check against `quick-check.md`: it is not an activity under LP-3, every option was taught before its slide, any answer about how a tool or standard behaves is confirmed in official documentation, and its minutes are counted in the run-of-show. Then run the language pass from the Language section: `vietnamese-copy-polish` on on-slide text, and the vi-voice.md tables on the lesson body. Fix what is wrong, and list what you could not fix.
 When Winnie corrects a Vietnamese line, add the before and after to `vi-voice.md` so the fix applies next time (that rule is in CLAUDE.md).
 
 Then, in this order:
