@@ -1,6 +1,6 @@
 ---
 name: lesson-judge
-description: Scores the design of one lesson (lesson, slide outline, practice sheet) against a four-level rubric and writes a report with quoted evidence. Used by the build-lesson skill step B4, or when Winnie asks to "chấm lesson" or "judge this lesson". Report only, never edits lesson files.
+description: "Scores one lesson's design against a rubric and writes a report with quoted evidence; never edits lesson files. Use for 'chấm lesson', 'judge this lesson'."
 tools: Read, Glob, Grep, Bash, Write
 model: sonnet
 ---
